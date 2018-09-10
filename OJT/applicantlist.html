@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071) -->
+<html lang="en">
+<head>
+	<title>Applicant List</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Material Design Bootstrap -->
+	<link href="assets/css/mdb.min.css" rel="stylesheet">
+
+	<link href="assets/css/font-awesome.css" rel="stylesheet">
+	<link href="assets/css/stepper.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/try.css">
+</head>
+
+<body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+
+	<!--Double navigation-->
+	<header>
+		<!-- Sidebar navigation -->
+		<div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
+			<ul class="custom-scrollbar">
+				<!-- Logo -->
+				<li>
+					<center>
+						<img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
+					</center>
+				</li>
+				<!--/. Logo -->
+				<!--Social-->
+
+				<!--/.Search Form-->
+				<!-- Side navigation links -->
+				<li>
+					<hr>
+					<ul class="collapsible collapsible-accordion">
+						<li><a class="collapsible-header waves-effect arrow-r" href="company.html"><i class="fa fa-home"></i>Home</a>
+							<li><a class="collapsible-header waves-effect arrow-r" href="companyprofile.html"><i class="fa fa-cogs"></i>Company Profile</a></li>
+							<li class="active-page"><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-list-alt"></i>Applicant List</a></li>
+							<li><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-sign-out"></i>Log-out</a></li>
+							<!--/. Side navigation links -->
+						</ul>
+						<div class="sidenav-bg mask-strong"></div>
+					</div>
+					<!--/. Sidebar navigation -->
+					<!-- Navbar -->
+					<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
+						<!-- SideNav slide-out button -->
+						<div class="float-left">
+							<a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
+						</div>
+						<!-- Breadcrumb-->
+						<div class="breadcrumb-dn mr-auto white-text">
+							<p>On The Job Training for CCS</p>
+						</div>
+					</nav>
+					<!-- /.Navbar -->
+				</header>
+				<!--/.Double navigation-->
+				<!-- main navigation -->
+				<main>
+					<div class="container-fluid text-center">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs md-tabs nav-justified orange" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#panel555" role="tab">
+											<i class="fa fa-graduation-cap"></i>Applicant Pendings</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" href="#panel666" role="tab">
+												<i class="fa fa-envelope"></i>Company Hire Pendings</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- Nav tabs -->
+								<!-- Tab panels -->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="tab-content">
+											<!--Panel 1-->
+											<div class="tab-pane fade in show active" id="panel555" role="tabpanel">
+												<!--Table-->
+
+												<!--Table-->
+												<div class="table-responsive">
+													<table class="table table-striped w-auto">
+														<thead>
+															<tr>
+																<th>Student ID</th>
+																<th>Name</th>
+																<th>Program</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="studApply"></tbody>
+													</table>
+												</div>
+												<!--Table-->
+
+											</div>
+											<!--/.Panel 1-->
+											<!--Panel 2-->
+											<div class="tab-pane fade" id="panel666" role="tabpanel">
+												<div class="table-responsive">
+													<table class="table table-striped w-auto">
+														<thead>
+															<tr>
+																<th>Student ID</th>
+																<th>Name</th>
+																<th>Program</th>
+																<th>Remarks</th>
+															</tr>
+														</thead>
+														<tbody id="compSelect"></tbody>
+													</table>
+												</div>
+											</div>
+											<!--/.Panel 2-->
+										</div>
+									</div>
+								</div>
+								<!-- Tab panels -->
+							</div>
+						</main>
+
+
+
+
+						<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+						<script type="text/javascript" src="js/popper.min.js"></script>
+						<script type="text/javascript" src="js/bootstrap.min.js"></script>
+						<script type="text/javascript" src="js/mdb.min.js"></script>
+						<script type="text/javascript" src="js/Chart.min.js"></script>
+						<script type="text/javascript" src="js/Chart.bundle.min.js"></script>
+						<script type="text/javascript" src="js/stepper.js"></script>
+						<script type="text/javascript" src="js/jspdf.min.js"></script>
+						<!-- <script type="text/javascript" src="js/mainfunc.js"></script> -->
+
+						<script src="js/company.js"></script>
+
+						<script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+        $('.mdb-select').material_select();
+        new WOW().init();
+        compSelectStudList();
+    </script>
+    <script>
+
+
+    </script>
+
+</body>
+
+</html>
