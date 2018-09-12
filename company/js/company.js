@@ -22,6 +22,7 @@ function compareData(compID,stdID){
 	return false;
 
 }
+
 const viewStud = (id) =>{	
 	localStorage.id = id;
 	window.location.assign('viewapplicant.html');
@@ -44,6 +45,7 @@ const viewCompanyPro = () =>{
 		document.getElementById('compAdd').value = data[0].fldCompanyAddress;
 		document.getElementById('compContact').value = data[0].fldContactNo;
 		document.getElementById('compTel').value = data[0].fldTelNo;
+		document.getElementById('companylogo').setAttribute('src',data[0].fldCompanyImg);
 	});
 }
 const CompanyHire = (studsid) =>{
@@ -149,28 +151,28 @@ const searchStud = (val) => {
 		for(let i =0; i < data.length;i++){
 			if(data[i].fldStatus=='Available'){
 				
-			longstring +="<div class='col-md-4'>";
-			longstring +="<div class='card testimonial-card'>";
-			longstring +="<div class='card-up orange lighten-1'>";
-			longstring +="</div>";
-			longstring +="<div class='avatar mx-auto white'><img src="+data[i].fldImage+" class='rounded-circle'></div>";
-			longstring += "<div class='card-body'>";
-			longstring +="<h4 class='card-title'>"+data[i].fldFname+' '+data[i].fldMname+' '+data[i].fldLname+"</h4>";
-			longstring +="<hr>";
-			longstring +=" <p><i class='fa fa-quote-left'></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>";
-			longstring +="<button class='btn btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
-			if(compareData(1,data[i].fldStudentID)){
-				longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
-			}else{
-				longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
-			}
-			longstring +="</div>";
-			longstring +="</div>";
-			longstring +="<br>";
-			longstring +="</div>";
+				longstring +="<div class='col-md-4'>";
+				longstring +="<div class='card testimonial-card'>";
+				longstring +="<div class='card-up orange lighten-1'>";
+				longstring +="</div>";
+				longstring +="<div class='avatar mx-auto white'><img src="+data[i].fldImage+" class='rounded-circle'></div>";
+				longstring += "<div class='card-body'>";
+				longstring +="<h4 class='card-title'>"+data[i].fldFname+' '+data[i].fldMname+' '+data[i].fldLname+"</h4>";
+				longstring +="<hr>";
+				longstring +=" <p><i class='fa fa-quote-left'></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>";
+				longstring +="<button class='btn btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
+				if(compareData(1,data[i].fldStudentID)){
+					longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
+				}else{
+					longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
+				}
+				longstring +="</div>";
+				longstring +="</div>";
+				longstring +="<br>";
+				longstring +="</div>";
 			}
 		}
-			$('#stuAvail').html(longstring);
+		$('#stuAvail').html(longstring);
 	});
 }
 const findStud = () => {
@@ -224,26 +226,34 @@ const updateAccount = () =>{
 		}
 	});
 }
+
 const attendanceStud = () =>{
-	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_dtr/fldStudentID').then((res)=>res.json()).then(function(data){
+	let companyID = 1;
+
+	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
+
 		studentTab = "";
 		studentRec = "";
 		
 		for(let i = 0;i<data.length;i++){
-			studentTab +="<li class='nav-item'>";
-			if(i==0){
-				studentTab +="<a class='nav-link active' data-toggle='tab' href='#"+data[i].fldStudentID+"' role='tab' onclick='getID("+data[i].fldStudentID+")'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
-			}else{
-				studentTab +="<a class='nav-link' data-toggle='tab' href='#"+data[i].fldStudentID+"' role='tab' onclick='getID("+data[i].fldStudentID+")'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
+			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
+
+				studentTab +="<li class='nav-item'>";
+				if(i==0){
+					studentTab +="<a class='nav-link active' data-toggle='tab' href='#"+i+"' role='tab' onclick='getID("+data[i].fldStudentID+")'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
+				}else{
+					studentTab +="<a class='nav-link' data-toggle='tab' href='#"+i+"' role='tab' onclick='getID("+data[i].fldStudentID+")'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
+				}
+				studentTab +="</li>";	
+				if(i==0){
+					studentRec +="<div class='tab-pane fade in show active' id='"+i+"' role='tabpanel'>";	
+
+				}else{
+					studentRec +="<div class='tab-pane fade' id='"+i+"' role='tabpanel'>";
+				}
+				studentRec +="<h5 class='my-2 h5' id=''>"+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</h5></div>";
+
 			}
-			studentTab +="</li>";	
-			if(i==0){
-				studentRec +="<div class='tab-pane fade in show active' id='"+data[i].fldStudentID+"' role='tabpanel'>";	
-				
-			}else{
-				studentRec +="<div class='tab-pane fade' id='"+data[i].fldStudentID+"' role='tabpanel'>";
-			}
-			studentRec +="<h5 class='my-2 h5' id=''>"+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</h5></div>";
 
 		}
 
@@ -260,16 +270,16 @@ const attendanceStud = () =>{
 		studentRec +="<tbody id='dtrStud'></tbody>";
 		studentRec +="</div>";
 		studentRec +="</div>";
-		
 
 		$('#studentList').html(studentTab);
 		$('#student-record').html(studentRec);
 		
 	});
+	
 }
 const getID = (id) =>{
-	let recID = id;
-	fetch(myurl+'/ojtapi/select/tbl_dtr/fldStudentID/'+recID).then((res)=> res.json()).then(function (data){
+	
+	fetch(myurl+'/ojtapi/select/tbl_dtr/fldStudentID/'+id).then((res)=> res.json()).then(function (data){
 		dtrStud = "";
 		for(let i =0 ;i<data.length;i++){
 			dtrStud +="<tr>";
@@ -282,24 +292,104 @@ const getID = (id) =>{
 		$('#dtrStud').html(dtrStud);
 	});	
 }
+let timein = [];
+let timeout = [];
+let remarks = [];
 const checkAttendance = () =>{
+	companyID =1 ;
 	check = "";
-	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_dtr/fldStudentID').then((res)=>res.json()).then(function(data){
+	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
 		for(let i =0;i<data.length;i++){
-			check +="<tr>";
-			check +="<td>"+data[i].fldLname+','+data[i].fldFname+','+data[i].fldMname+"</td>";
-			check +="<td>";
-			check +='<input type="time" id="timeIn'+i+'">';
-			check +="</td>";
-			check +="<td>";
-			check +='<input type="time"id="timeOut'+i+'">';
-			check +="</td>";
-			check +="<td><input type='text' placeholder='Remarks'></td>";
-			check +="</tr>";
+			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
+				check +="<input type='text' id='ids"+i+"' value='"+data[i].fldStudentID+"' hidden/>";
+				check +="<tr>";
+				check +="<td>"+data[i].fldLname+','+data[i].fldFname+','+data[i].fldMname+"</td>";
+				check +="<td>";
+				check +='<input type="time" id="timeIn'+i+'">';
+				check +="</td>";
+				check +="<td>";
+				check +='<input type="time"id="timeOut'+i+'">';
+				check +="</td>";
+				check +="<td><input type='text' placeholder='Remarks' id='remarks"+i+"'></td>";
+				check +="</tr>";
+				counter();
+			}
 		}
 		$('#checkAttendance').html(check);
 	});
 
+}
+
+let xCount = 0
+const counter = () =>{
+	xCount++;
+}
+
+const getxco = () =>{
+	return xCount;
+}
+
+
+
+const sendDTR = () =>{
+
+	let xdata = [];
+	let ids = "#ids";
+	let timeIn = "#timeIn";
+	let timeOut = "#timeOut";
+	let remarks1 = "#remarks";
+
+	var today = new Date();
+	var day =  today.getDay();
+	var mon = today.getMonth();
+	var year = today.getFullYear();
+
+
+
+	for(let i = 1; i <= getxco(); i++){
+		let idss = $(ids + i).val();
+		let sval = $(timeIn + i).val();
+		let sval1 = $(timeOut + i).val();
+		let sval2 = $(remarks1 + i).val();
+		if(sval != "" && sval1 !="" && idss !=""){
+			let jsonObj = {
+			 studentNo: idss,
+			 timein: sval, 
+			 tout: sval1, 
+			 date : mon+"/"+day+"/"+year,
+			 rmark: sval2 
+			};
+			xdata.push(jsonObj);
+		}
+	}
+
+	fetch(myurl+"/ojtapi/insert/tbl_dtr",{
+		method:"POST",
+		body:JSON.stringify(xdata)
+	}).then(function(data){
+		toastr.success('DTR submitted successfully ');
+		window.location.assign('companydtr.html');
+	});
+
+	
+}
+function encodeImageFileAsURL(element) {
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    let CompanyId =1 
+	let img={
+		fldCompanyImg : reader.result
+	}
+	fetch(myurl+"/ojtapi/update/tbl_companies/fldCompanyID/"+CompanyId,{
+		method:"POST",
+		body:JSON.stringify([img])	
+	}).then(function(data){
+		toastr.success('Update Image Successfully ');
+		window.location.assign('companyprofile.html');
+	});
+  }
+  reader.readAsDataURL(file);
 }
 
 

@@ -39,10 +39,10 @@
                 <li>
                     <hr>
                     <ul class="collapsible collapsible-accordion">
-                       <li><a class="collapsible-header waves-effect arrow-r" href="company.html"><i class="fa fa-home"></i>Home</a>
+                     <li><a class="collapsible-header waves-effect arrow-r" href="company.html"><i class="fa fa-home"></i>Home</a>
                         <li class="active-page"><a class="collapsible-header waves-effect arrow-r" href="companyprofile.html"><i class="fa fa-cogs"></i>Company Profile</a></li>
                         <li><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-list-alt"></i>Applicant List</a></li>
-                         <li><a class="collapsible-header waves-effect arrow-r" href="companydtr.html"><i class="fa fa-calendar"></i>Student DTR</a></li>
+                        <li><a class="collapsible-header waves-effect arrow-r" href="companydtr.html"><i class="fa fa-calendar"></i>Student DTR</a></li>
                         <li ><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-sign-out"></i>Log-out</a></li>
                     </ul>
                     <div class="sidenav-bg mask-strong"></div>
@@ -74,108 +74,119 @@
                                 </div>
 
                                 <!-- Avatar -->
-                                <div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle">
+                                <div class="avatar mx-auto white"><img id="companylogo" class="rounded-circle">
                                 </div>
 
                                 <div class="card-body">
                                     <!-- Name -->
                                     <h4 class="card-title" id="companyName"></h4>
-                                    <hr>
-                                    <!-- Quotation -->
-                                    <p><i class="fa fa-quote-left"></i> We Find Ways</p>
-                                </div>
 
+                                    <form class="md-form">
+                                        <div class="file-field big">
+                                            <a class="btn-floating btn-lg amber darken-2 mt-0 float-left">
+                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                                <input type="file" onchange="encodeImageFileAsURL(this)">
+                                            </a>
+                                            <div class="file-path-wrapper">
+                                             <input class="file-path validate" type="text" placeholder="Upload one or more files" id="img">
+                                         </div>
+                                     </div>
+                                 </form>
+
+                                
+                             </div>
+
+                         </div>
+                     </div>
+                     <div class="col-md-8">
+                        <div class="card wow fadeIn animated card-cascade reverse">
+                            <div class="view gradient-card-header orange flex-center" style="width: 100%;">
+                                <h4><i class="fa fa-user"></i> Company Profile</h4>
                             </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card wow fadeIn animated card-cascade reverse">
-                                <div class="view gradient-card-header orange flex-center" style="width: 100%;">
-                                    <h4><i class="fa fa-user"></i> Company Profile</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="col-md-12 row">
-                                        <div class="col-lg-12">
-                                            <span>Company Email Address</span>
-                                            <input type="email" id="compEmail" class="form-control mb-4">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 row">
-                                        <div class="col-lg-12">
-                                            <span>Company Address</span>
-                                            <textarea class="form-control mb-4" id="compAdd"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 ">
-                                            <div class="col-lg-12">
-                                                <span>Contact No</span>
-                                                <input type="text" class="form-control mb-4" id="compContact">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <div class="col-lg-12">
-                                                <span>Tel No.</span>
-                                                <input type="text" class="form-control mb-4" id="compTel">
-                                            </div>
-                                        </div>
+                            <div class="card-body">
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-12">
+                                        <span>Company Email Address</span>
+                                        <input type="email" id="compEmail" class="form-control mb-4">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8 offset-md-4">
-                            <br>
-                            <div class="card wow fadeIn animated card-cascade reverse">
-                                <div class="view gradient-card-header orange flex-center" style="width: 100%;">
-                                    <h4><i class="fa fa-cogs"></i> Account Settings</h4>
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-12">
+                                        <span>Company Address</span>
+                                        <textarea class="form-control mb-4" id="compAdd"></textarea>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="col-md-12 row">
+                                <div class="row">
+                                    <div class="col-md-6 ">
                                         <div class="col-lg-12">
-                                            <span>New Email Address</span>
-                                            <input type="email" id="compNewEmail" class="form-control mb-4">
+                                            <span>Contact No</span>
+                                            <input type="text" class="form-control mb-4" id="compContact">
                                         </div>
                                     </div>
-                                    <div class="col-md-12 row">
+                                    <div class="col-md-6 ">
                                         <div class="col-lg-12">
-                                            <span>Current Password</span>
-                                            <input type="password" id="compCurrPass" class="form-control mb-4">
+                                            <span>Tel No.</span>
+                                            <input type="text" class="form-control mb-4" id="compTel">
                                         </div>
-                                    </div>
-                                    <div class="col-md-12 row">
-                                        <div class="col-lg-12">
-                                            <span>New Password</span>
-                                            <input type="password" id="compNewPass" class="form-control mb-4">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 row">
-                                        <div class="col-lg-12">
-                                            <span>Confirm Password</span>
-                                            <input type="password" id="compConPass" class="form-control mb-4">
-                                        </div>
-                                    </div>
-                                    <div class="flex-center">
-                                        <button type="button" class="btn btn-primary" onclick="updateAccount()">Submit</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </main>
+                    </div>
+                    <div class="col-md-8 offset-md-4">
+                        <br>
+                        <div class="card wow fadeIn animated card-cascade reverse">
+                            <div class="view gradient-card-header orange flex-center" style="width: 100%;">
+                                <h4><i class="fa fa-cogs"></i> Account Settings</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-12">
+                                        <span>New Email Address</span>
+                                        <input type="email" id="compNewEmail" class="form-control mb-4">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-12">
+                                        <span>Current Password</span>
+                                        <input type="password" id="compCurrPass" class="form-control mb-4">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-12">
+                                        <span>New Password</span>
+                                        <input type="password" id="compNewPass" class="form-control mb-4">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-lg-12">
+                                        <span>Confirm Password</span>
+                                        <input type="password" id="compConPass" class="form-control mb-4">
+                                    </div>
+                                </div>
+                                <div class="flex-center">
+                                    <button type="button" class="btn btn-primary" onclick="updateAccount()">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
 
 
 
 
-                    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-                    <script type="text/javascript" src="js/popper.min.js"></script>
-                    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-                    <script type="text/javascript" src="js/mdb.min.js"></script>
-                    <script type="text/javascript" src="js/Chart.min.js"></script>
-                    <script type="text/javascript" src="js/Chart.bundle.min.js"></script>
-                    <script type="text/javascript" src="js/stepper.js"></script>
-                    <script type="text/javascript" src="js/jspdf.min.js"></script>
-                    
-                    <script src="js/company.js"></script>
+                <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+                <script type="text/javascript" src="js/popper.min.js"></script>
+                <script type="text/javascript" src="js/bootstrap.min.js"></script>
+                <script type="text/javascript" src="js/mdb.min.js"></script>
+                <script type="text/javascript" src="js/Chart.min.js"></script>
+                <script type="text/javascript" src="js/Chart.bundle.min.js"></script>
+                <script type="text/javascript" src="js/stepper.js"></script>
+                <script type="text/javascript" src="js/jspdf.min.js"></script>
 
-                    <script>
+                <script src="js/company.js"></script>
+
+                <script>
         // SideNav Initialization
         $(".button-collapse").sideNav();
         $('.mdb-select').material_select();
