@@ -1,4 +1,4 @@
-let myurl ="http://localhost";
+let myurl ="http://gordoncollegecss-ssite.net";
 
 fetch(myurl+"/ojtapi/select/tbl_students").then((res) =>res.json()).then(function(data){
 	let longstring = "";
