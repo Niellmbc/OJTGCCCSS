@@ -3,6 +3,8 @@ let myurl ="http://localhost";
 fetch(myurl+"/ojtapi/select/tbl_students").then((res) =>res.json()).then(function(data){
 	let longstring = "";
 	for(let i = 0;i < data.length ; i++){
+		if(data[i].fldStatus=='Available'){
+
 		longstring +="<div class='col-md-4'>";
 		longstring +="<div class='card testimonial-card'>";
 		longstring +="<div class='card-up orange lighten-1'>";
@@ -22,6 +24,7 @@ fetch(myurl+"/ojtapi/select/tbl_students").then((res) =>res.json()).then(functio
 		longstring +="</div>";
 		longstring +="<br>";
 		longstring +="</div>";
+		}
 	}
 	$('#stuAvail').html(longstring);
 });
@@ -57,6 +60,7 @@ const viewApplicant = () =>{
 	fetch(myurl+"/ojtapi/select/tbl_students/fldStudentID/"+id).then((res)=>res.json()).then(function(data){
 		document.getElementById('picpath').setAttribute('src',data[0].fldImage);
 		document.getElementById('myname').innerHTML = data[0].fldFname+' '+data[0].fldMname+' '+data[0].fldLname;
+		document.getElementById('resume').innerHTML = "<embed src='"+data[0].fldResume+"' width='800' height='800'>";
 	});
 }
 const viewCompanyPro = () =>{
@@ -87,6 +91,7 @@ const CompanyHire = (studsid) =>{
 		window.location.assign('company.html');
 	});
 }
+
 const compSelectStudList = () =>{
 	let studid = localStorage.studsid;
 	let compId = 1;
@@ -104,13 +109,13 @@ const compSelectStudList = () =>{
 				longstring1 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring1 +="</tr>";
 			}
-			if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Applied by Student'){
+			if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Requested by Student'){
 				longstring2 +="<tr>";
 				longstring2 +="<th scope='row'>"+data[i].fldStudentID+"</th>";
 				longstring2 +="<td>"+data[i].fldLname+', '+data[i].fldFname+', '+data[i].fldMname+"</td>";
 				longstring2 +="<td>"+data[i].fldCourse+"</td>";
 				longstring2 +="<td>"+data[i].fldRemarks+"</td>";
-				longstring2 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
+				longstring2 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='ApproveRequest("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring2 +="</tr>";
 			} 
 		}
@@ -118,7 +123,29 @@ const compSelectStudList = () =>{
 		$('#studApply').html(longstring2);	
 	});
 }
-
+const ApproveRequest = (studentID) =>{
+	let hireDet = {
+		CompanyId: "1",
+		StudentId: studentID,
+		Remarks: "Approve Request"
+	}
+	let approve = {
+		fldStatus : "Hired"
+	}
+	fetch(myurl+"/ojtapi/delete/tbl_pendings/fldStudentID/"+studentID).then(function(data){
+		fetch(myurl+ "/ojtapi/insert/tbl_pendings",{
+			method:"POST",
+			body:JSON.stringify([hireDet])
+		}).then(function(data){
+			toastr.success('You successfully hired a student');
+		});
+	});
+	
+	fetch(myurl+"/ojtapi/update/tbl_students/fldStudentID/"+studentID,{
+		method:"POST",
+		body:JSON.stringify([approve])
+	});
+}
 
 const HiredApplicantByView = () =>{
 	let longstring = "";
@@ -148,6 +175,8 @@ const searchStud = (val) => {
 	fetch(myurl+"/ojtapi/select/tbl_students/fldCourse/"+val).then((res)=>res.json()).then(function(data){
 		let longstring = "";
 		for(let i =0; i < data.length;i++){
+			if(data[i].fldStatus=='Available'){
+				
 			longstring +="<div class='col-md-4'>";
 			longstring +="<div class='card testimonial-card'>";
 			longstring +="<div class='card-up orange lighten-1'>";
@@ -167,8 +196,9 @@ const searchStud = (val) => {
 			longstring +="</div>";
 			longstring +="<br>";
 			longstring +="</div>";
-			$('#stuAvail').html(longstring);
+			}
 		}
+			$('#stuAvail').html(longstring);
 	});
 }
 const findStud = () => {
@@ -226,47 +256,79 @@ const attendanceStud = () =>{
 	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_dtr/fldStudentID').then((res)=>res.json()).then(function(data){
 		studentTab = "";
 		studentRec = "";
-		dtrStud = "";
+		
 		for(let i = 0;i<data.length;i++){
 			studentTab +="<li class='nav-item'>";
 			if(i==0){
-				studentTab +="<a class='nav-link active' data-toggle='tab' href='#"+data[i].fldStudentID+"' role='tab'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
+				studentTab +="<a class='nav-link active' data-toggle='tab' href='#"+data[i].fldStudentID+"' role='tab' onclick='getID("+data[i].fldStudentID+")'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
 			}else{
-				studentTab +="<a class='nav-link' data-toggle='tab' href='#"+data[i].fldStudentID+"' role='tab'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
+				studentTab +="<a class='nav-link' data-toggle='tab' href='#"+data[i].fldStudentID+"' role='tab' onclick='getID("+data[i].fldStudentID+")'><i class='fa fa-user ml-2'></i> "+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</a>";
 			}
-			studentTab +="</li>";			
-		}
-		for(let i=0;i<data.length;i++){
+			studentTab +="</li>";	
 			if(i==0){
 				studentRec +="<div class='tab-pane fade in show active' id='"+data[i].fldStudentID+"' role='tabpanel'>";	
 				
-				}else{
+			}else{
 				studentRec +="<div class='tab-pane fade' id='"+data[i].fldStudentID+"' role='tabpanel'>";
 			}
-				studentRec +="<h5 class='my-2 h5' id=''>"+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</h5>";
-			
-			
+			studentRec +="<h5 class='my-2 h5' id=''>"+data[i].fldFname+','+data[i].fldMname+','+data[i].fldLname+"</h5></div>";
+
 		}
+
+		studentRec +="<div class='table-responsive'>";
+		studentRec +="<table class='table table-striped w-auto'>";
+		studentRec +="<thead>";
+		studentRec +="<tr>";
+		studentRec +="<th>Time IN</th>";
+		studentRec +="<th>Time OUT</th>";
+		studentRec +="<th>Date</th>";
+		studentRec +="<th>Remarks</th>";
+		studentRec +="</tr>";
+		studentRec +="</thead>";
+		studentRec +="<tbody id='dtrStud'></tbody>";
+		studentRec +="</div>";
+		studentRec +="</div>";
 		
-			// studentRec +="<div class='table-responsive'>";
-			// studentRec +="<table class='table table-striped w-auto'>";
-			// studentRec +="<thead>";
-			// studentRec +="<tr>";
-			// studentRec +="<th>Time IN</th>";
-			// studentRec +="<th>Time OUT</th>";
-			// studentRec +="<th>Date</th>";
-			// studentRec +="<th>Remarks</th>";
-			// studentRec +="</tr>";
-			// studentRec +="</thead>";
-			// studentRec +="<tbody id='dtrStud'></tbody>";
-			// studentRec +="</div>";
-			studentRec +="</div>";
-		
+
 		$('#studentList').html(studentTab);
 		$('#student-record').html(studentRec);
+		
 	});
 }
+const getID = (id) =>{
+	let recID = id;
+	fetch(myurl+'/ojtapi/select/tbl_dtr/fldStudentID/'+recID).then((res)=> res.json()).then(function (data){
+		dtrStud = "";
+		for(let i =0 ;i<data.length;i++){
+			dtrStud +="<tr>";
+			dtrStud +="<td>"+data[i].fldTimeIn+"</td>";
+			dtrStud +="<td>"+data[i].fldTimeOut+"</td>";
+			dtrStud +="<td>"+data[i].fldDate+"</td>";
+			dtrStud +="<td>"+data[i].fldRemarks+"</td>";
+			dtrStud +="</tr>";
+		}
+		$('#dtrStud').html(dtrStud);
+	});	
+}
+const checkAttendance = () =>{
+	check = "";
+	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_dtr/fldStudentID').then((res)=>res.json()).then(function(data){
+		for(let i =0;i<data.length;i++){
+			check +="<tr>";
+			check +="<td>"+data[i].fldLname+','+data[i].fldFname+','+data[i].fldMname+"</td>";
+			check +="<td>";
+			check +='<input type="time" id="timeIn'+i+'">';
+			check +="</td>";
+			check +="<td>";
+			check +='<input type="time"id="timeOut'+i+'">';
+			check +="</td>";
+			check +="<td><input type='text' placeholder='Remarks'></td>";
+			check +="</tr>";
+		}
+		$('#checkAttendance').html(check);
+	});
 
+}
 
 
 

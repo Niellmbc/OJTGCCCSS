@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/try.css">
 </head>
 
-<body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+<body class="fixed-sn white-skin" data-gr-c-s-loaded="true" onload="startTime()">
 
 	<!--Double navigation-->
 	<header>
@@ -42,6 +42,7 @@
 						<li><a class="collapsible-header waves-effect arrow-r" href="company.html"><i class="fa fa-home"></i>Home</a>
 							<li class="active-page"><a class="collapsible-header waves-effect arrow-r" href="companyprofile.html"><i class="fa fa-cogs"></i>Company Profile</a></li>
 							<li><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-list-alt"></i>Applicant List</a></li>
+							 <li><a class="collapsible-header waves-effect arrow-r" href="companydtr.html"><i class="fa fa-calendar"></i>Student DTR</a></li>
 							<li ><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-sign-out"></i>Log-out</a></li>
 						</ul>
 						<div class="sidenav-bg mask-strong"></div>
@@ -101,11 +102,23 @@
 									<!--/.Panel 1-->
 									<!--Panel 2-->
 									<div class="tab-pane fade" id="panel666" role="tabpanel">
-										<br>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae
-										placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae
-										placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+										<div class="table-responsive">
+											<h4 id="today" class="flex-center"></h4>
+											<table class="table table-striped w-auto">
+												<thead>
+													<tr>
+														<th>Student Name</th>
+														<th>Time IN</th>
+														<th>Time OUT</th>
+													</tr>
+												</thead>
+												<tbody id="checkAttendance"></tbody>
+											</table>
+											<div class="flex-center">
+												<button class="btn btn-primary" type="submit">Confirm</button>
+											</div>
+											
+										</div>
 									</div>
 									<!--/.Panel 2-->
 								</div>
@@ -136,9 +149,35 @@
     </script>
     <script>
 
-    	attendanceStud();
-
+    	attendanceStud();	
+    	setTimeout(function(){
+    		checkAttendance();	
+    	},1000);
     </script>
+    <script>
+    	function startTime() {
+
+    		var months = ["January","February","March","April","May","June","July","August","September","October","November","December"]; 
+    		var today = new Date();
+    		var h = today.getHours();
+    		var m = today.getMinutes();
+    		var s = today.getSeconds();
+    		var day =  today.getDay();
+    		var mon = today.getMonth();
+    		var year = today.getFullYear();
+    		var aorp = "";
+    		m = checkTime(m);
+    		s = checkTime(s);
+    		if (h > 12) { h = h-12; aorp = "PM"; } else { aorp = "AM"; }
+    		document.getElementById('today').innerHTML =
+    		months[mon]+" "+day+", "+ year+" "+h + ":" + m + ":" + s + " " + aorp;
+    		var t = setTimeout(startTime, 500);
+    	}
+    	function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+</script>
 
 </body>
 
