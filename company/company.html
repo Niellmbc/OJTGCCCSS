@@ -142,10 +142,10 @@
         $('.mdb-select').material_select();
         new WOW().init();
 
-fetch(myurl+"/ojtapi/select/tbl_students").then((res) =>res.json()).then(function(data){
+fetch(myurl+"/ojtapi/select/tbl_students/fldStatus/Available").then((res) =>res.json()).then(function(data){
   let longstring = "";
   for(let i = 0;i < data.length ; i++){
-    if(data[i].fldStatus=='Available'){
+    
 
     longstring +="<div class='col-md-4'>";
     longstring +="<div class='card testimonial-card'>";
@@ -166,7 +166,7 @@ fetch(myurl+"/ojtapi/select/tbl_students").then((res) =>res.json()).then(functio
     longstring +="</div>";
     longstring +="<br>";
     longstring +="</div>";
-    }
+    
   }
   $('#stuAvail').html(longstring);
 });
