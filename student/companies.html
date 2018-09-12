@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071) -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="assets/css/mdb.min.css" rel="stylesheet">
+
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/stepper.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+
+    <!--Double navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+
+                    <center>
+                        <img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
+                    </center>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <hr>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="collapsible-header waves-effect arrow-r" href="accounts.html"><i class="fa fa-cog"></i> Account Settings<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-user"></i> Resume Builder<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="companies.html"><i class="fa fa-dashboard"></i> Companies<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="myojt.html"><i class="fa fa-truck"></i> My Company<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="studentstatus.html"><i class="fa fa-address-book"></i> OJT Status<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="login.html"><i class="fa fa-sign-out"></i> Log Out<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                    </ul>
+                    </li>
+                    <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto white-text">
+                <p>On The Job Training for CCS</p>
+            </div>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+
+    <!--Main layout-->
+    <main>
+        <div class="container text-center">
+            <h5>Available Request: <span id="reqno">3</span></h5>
+            <div class="row" id="companyList">
+
+            </div>
+        </div>
+    </main>
+    <!--/Main layout-->
+
+    <!--Footer-->
+    <br><br><br><br>
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/Chart.min.js"></script>
+    <script type="text/javascript" src="js/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="js/stepper.js"></script>
+    <script type="text/javascript" src="js/jspdf.min.js"></script>
+
+    <script>
+        let studentId = "201610365";
+        let myurl = "http://localhost";
+
+
+        $.ajaxSetup({
+            async: false
+        })
+
+        let sdata = [];
+        let availReq = 3;
+
+        $.getJSON(myurl + "/ojtapi/select/tbl_pendings/", function(data) {
+            for (let i = 0; i < data.length; i++) {
+
+                if (studentId == data[i].fldStudentID && data[i].fldRemarks == "Requested by Student") {
+                    availReq -= 1;
+                }
+            }
+
+            $("#reqno").html(availReq);
+            sdata = data;
+        });
+        let checkVal = (companyId, stId) => {
+            for (let i = 0; i < sdata.length; i++) {
+                if (stId == sdata[i].fldStudentID && companyId == sdata[i].fldCompanyID && sdata[i].fldRemarks == "Requested by Student") {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        let getTransactionID = (companyId, stId) => {
+            for (let i = 0; i < sdata.length; i++) {
+                if (stId == sdata[i].fldStudentID && companyId == sdata[i].fldCompanyID && sdata[i].fldRemarks == "Requested by Student") {
+                    return sdata[i].fldTransactionID;
+                }
+            }
+            return false;
+        }
+
+
+        fetch(myurl + "/ojtapi/select/tbl_companies").then((resp) => resp.json()).then(function(data) {
+            let ls = "";
+
+            for (let i = 0; i < data.length; i++) {
+                ls += '<div class="col-sm-4 mt-4"><!-- Card Dark --><div class="card"><div class="view overlay"><img class="card-img-top" src="https://www.eyeonwindows.com/wp-content/uploads/2014/08/microsoft_headquarters_ireland.jpg" alt="Card image cap"><a><div class="mask rgba-white-slight"></div></a></div><div class="card-body  rounded-bottom"><a class="activator waves-effect mr-4"><i class="fa fa-share-alt "></i></a>';
+                ls += '<h4 class="card-title">' + data[i].fldCompanyName + '</h4>';
+                ls += '<hr class="hr-light">';
+                ls += '<p class="card-text  mb-4">At Microsoft our mission and values are to help people and businesses throughout the world realize ... </p>';
+                ls += '<p class="card-text  mb-4">Available Slots: 2</p>';
+                if (!checkVal(data[i].fldCompanyID, studentId)) {
+                    ls += '<button class="btn btn-primary" onclick="sentFunc(' + data[i].fldCompanyID + ', this.id)" id="aBtn' + data[i].fldCompanyID + '"> Apply Here</button>';
+                } else {
+                    ls += '<button class="btn btn-outline-danger" onclick="cancelFunc(' + data[i].fldCompanyID + ', this.id)" id="aBtn' + data[i].fldCompanyID + '"> Cancel Request</button>';
+                }
+                ls += '<a href="#!" class=" d-flex justify-content-end">';
+                ls += '<h5>Read more <i class="fa fa-angle-double-right"></i></h5>';
+                ls += '</a></div></div></div>';
+            }
+
+            $("#companyList").html(ls);
+
+        });
+
+
+
+        let sentFunc = (val, myID) => {
+
+            let x = {
+                a: val,
+                b: studentId,
+                c: "Requested by Student"
+            };
+
+            
+            if(availReq > 0){
+                fetch(myurl + "/ojtapi/insert/tbl_pendings/", {
+                    method: "POST",
+                    body: JSON.stringify([x])
+                });
+
+
+                $("#" + myID).html("Cancel Request");
+                $("#" + myID).removeClass("btn-primary").addClass("btn-outline-danger");
+
+                window.location.assign("companies.html");
+            } else {
+                window.alert("Sorry but you already sen't the maximum number of request");
+            }
+        }
+
+        let cancelFunc = (val, myID) => {
+
+
+
+            fetch(myurl + "/ojtapi/delete/tbl_pendings/fldTransactionID/" + getTransactionID(val, studentId));
+
+
+            $("#" + myID).html("Apply Here");
+            $("#" + myID).removeClass("btn-outline-danger").addClass("btn-primary");
+
+
+            window.location.assign("companies.html");
+        }
+
+    </script>
+
+    <script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+        $('.mdb-select').material_select();
+        new WOW().init();
+
+    </script>
+    <script>
+
+
+    </script>
+
+</body>
+
+</html>

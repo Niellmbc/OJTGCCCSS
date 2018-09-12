@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071) -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="assets/css/mdb.min.css" rel="stylesheet">
+
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/stepper.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+
+    <!--Double navigation-->navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+
+                    <center>
+                        <img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
+                    </center>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <hr>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="collapsible-header waves-effect arrow-r" href="accounts.html"><i class="fa fa-cog"></i> Account Settings<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="index.html"><i class="fa fa-user"></i> Resume Builder<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="companies.html"><i class="fa fa-dashboard"></i> Companies<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="myojt.html"><i class="fa fa-truck"></i> My Company<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="studentstatus.html"><i class="fa fa-address-book"></i> OJT Status<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                            <li><a class="collapsible-header waves-effect arrow-r" href="login.html"><i class="fa fa-sign-out"></i> Log Out<i class="fa fa-angle-down rotate-icon"></i></a>
+                            </li>
+                    </ul>
+                    </li>
+                    <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="breadcrumb-dn mr-auto white-text">
+                <p>On The Job Training for CCS</p>
+            </div>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+
+    <!--Main layout-->
+    <main>
+        <div class="row">
+            <div class="col-12" id="pendingStudent">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs md-tabs nav-justified orange">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Sent Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Receive Request</a>
+                    </li>
+                </ul>
+                <!-- Tab panels -->
+                <div class="tab-content card">
+                    <!--Panel 1-->
+                    <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+                        <br>
+                        <div class="col-12">
+                            <div class="table-responsive d-flex justify-content-center">
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Company Name</th>
+                                            <th scope="col">Remarks</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sentList" class="text-center">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Panel 1-->
+                    <!--/.Panel 2-->
+                    <!--Panel 2-->
+                    <div class="tab-pane fade " id="panel2" role="tabpanel">
+                        <br>
+                        <div class="col-12">
+                            <div class="table-responsive d-flex justify-content-center">
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Company Name</th>
+                                            <th scope="col">Remarks</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reqList" class="text-center">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="container text-center" style="display: none">
+                <!--Card-->
+                <div class="card wow fadeIn animated card-cascade reverse">
+                    <div class="row">
+
+                        <div class="view gradient-card-header orange flex-center" style="width: 100%;">
+                            <h4><i class="fa fa-dashboard"></i> Company DTR</h4>
+                        </div>
+                        <!--Card content-->
+                        <div class="col-md-12 card wow fadeIn animated card-cascade reverse" style="padding: 7%;">
+
+                            <!-- Stepper -->
+                            <h1>Not Yet Available</h1>
+
+
+                        </div>
+                        <!--/.Card content-->
+                    </div>
+                </div>
+                <!--/.Card-->
+
+
+
+            </div>
+        </div>
+
+    </main>
+
+    <!--Footer-->
+    <br><br><br><br>
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/stepper.js"></script>
+    <script type="text/javascript" src="js/jspdf.min.js"></script>
+
+
+    <script>
+        var url = "http://localhost";
+        let studentId = "201610365";
+
+        let getSent = () => {
+            fetch(url + "/ojtapi/select/tbl_pendings/fldStudentID/" + studentId).then((resp) => resp.json()).then(function(data) {
+                let ls_f = "";
+                let ls_s = "";
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].fldRemarks == "Requested by Student") {
+                        ls_f += '<tr>';
+                        ls_f += '<td>' + data[i].fldCompanyID + '</td>';
+                        ls_f += '<td>Pending</td>';
+                        ls_f += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Cancel</button></td>';
+                        ls_f += '</tr>';
+                        
+                    } else {
+                        ls_s += '<tr>';
+                        ls_s += '<td>' + data[i].fldCompanyID + '</td>';
+                        ls_s += '<td>Pending</td>';
+                        ls_s += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-success waves-effect"><i class="fa fa-check"></i> Accept</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Decline</button></td>';
+                        ls_s += '</tr>';                        
+                    }
+                }
+                $("#sentList").html(ls_f);
+                $("#reqList").html(ls_s);
+            });
+        }
+
+        getSent();
+        let setCcode = (val) => {
+            localStorage.ccode = val;
+            window.location.assign("subjectinterface.html");
+        }
+
+        let insertIns = () => {
+            fetch(url + "/ojtapi/insert/tbl_user", {
+                method: "POST",
+                body: JSON.stringify([x])
+            }).then(function(data) {
+                console.log(data);
+            });
+        }
+
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function(n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
+        }
+
+
+
+        $('#contact-form').on('submit', function(e) {
+            e.preventDefault();
+            let xscc = $("#ccode").val();
+            let id = "1";
+            let sc = $("#scode").val();
+            let st = $("#stitle").val();
+            let sd = $("#sday").val();
+            let stime = $("#sttime").val() + " " + $("#sftime").val();
+            let sr = $("#sroom").val();
+
+
+            readAndSendChunk(xscc);
+
+            let x = {
+                "a": xscc,
+                "b": id,
+                "c": sc,
+                "d": st,
+                "e": sd,
+                "f": stime,
+                "g": sr,
+            };
+
+            fetch(url + "/ojtapi/insertnpk/tbl_classes", {
+                method: "POST",
+                body: JSON.stringify([x])
+            }).then(function(data) {
+                console.log(data);
+            });
+
+            window.alert("Class Added!");
+        });
+
+    </script>
+
+    <script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+        $('.mdb-select').material_select();
+        new WOW().init();
+
+    </script>
+
+</body>
+
+</html>

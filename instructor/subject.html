@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071) -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="assets/css/mdb.min.css" rel="stylesheet">
+
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/stepper.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+
+    <!--Double navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+
+                    <center>
+                        <img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
+                    </center>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <hr>
+                    <ul class="collapsible collapsible-accordion">
+
+                        <li><a class="collapsible-header waves-effect" href="accounts.html"><i class="fa fa-cog"></i> Account Settings</a>
+                        </li>
+
+                        <li><a class="collapsible-header waves-effect active" href="subject.html"><i class="fa fa-folder"></i> Subject Management</a>
+                        </li>
+
+                        <li><a class="collapsible-header waves-effect active" href="faqs.html"><i class="fa fa-info-circle"></i> Concerns/Feedback</a>
+                        </li>
+                        
+                        <li><a class="collapsible-header waves-effect active" href="students.html"><i class="fa fa-users"></i> Student List</a>
+                        </li>                        
+
+                        <li><a class="collapsible-header waves-effect" href="#"><i class="fa fa-sign-out"></i> Sign Out</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- breadcrumb-dn-->
+            <div class="breadcrumb-dn mr-auto white-text">
+                <p>On The Job Training for CCS | Registrar</p>
+            </div>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+
+    <!--Main layout-->
+    <main>
+        <div class="row">
+            <div class="col-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs md-tabs nav-justified orange">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Subject List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Add Subject</a>
+                    </li>
+                </ul>
+                <!-- Tab panels -->
+                <div class="tab-content card">
+                    <!--Panel 1-->
+                    <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+                        <br>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Student ID</th>
+                                            <th scope="col">Student Fullname</th>
+                                            <th scope="col">Student Course</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="subjectList">
+                                        <tr>
+                                            <th scope="row">201510068</th>
+                                            <td>Jane Doe</td>
+                                            <td>BSIT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201512024</th>
+                                            <td>John Doe</td>
+                                            <td>BSCS</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201526684</th>
+                                            <td>Lorem Ipsum</td>
+                                            <td>ACT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Panel 1-->
+                    <!--/.Panel 2-->
+                    <!--Panel 2-->
+                    <div class="tab-pane fade " id="panel2" role="tabpanel">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 mb-md-0 mb-5">
+                                <div class="card testimonial-card">
+                                    <!-- Bacground color -->
+                                    <div class="card-up indigo lighten-1">
+                                    </div>
+
+                                    <!-- Avatar -->
+                                    <div class="avatar mx-auto white"><img src="https://scontent.fmnl17-1.fna.fbcdn.net/v/t1.0-9/30594962_1848680835156102_6696431825004265472_n.jpg?_nc_cat=0&_nc_eui2=AeH39hjoUk4cJjwmui9Imtf55WIa68TPElH5pJfz-mrcy6bk4EMa23jzM6-ipyUX9sx9XwOw5Dig-zeYu14yTxs0JDDgKuC0UU-lyV20dniupA&oh=5a1867171b44313e32e064c0918d2c93&oe=5BFCFB0A" class="rounded-circle">
+                                    </div>
+
+                                    <div class="card-body">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-9 mb-md-0 mb-5">
+                                <form id="contact-form" name="contact-form">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="md-form mb-0">
+                                                <input type="text" id="ccode" name="aame" class="form-control">
+                                                <label for="ccode" class="">Class Code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="md-form mb-0">
+                                                <input type="text" id="scode" name="bame" class="form-control">
+                                                <label for="scode" class="">Subject Code</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="md-form mb-0">
+                                                <input type="text" id="stitle" name="came" class="form-control">
+                                                <label for="stitle" class="">Subject Title</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="md-form mb-0">
+                                                <input type="text" id="sday" name="dsername" class="form-control">
+                                                <label for="sday" class="">Subject Day e.g., Mon</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="md-form mb-0">
+                                                <input type="time" id="sttime" name="cpwd" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="md-form mb-0">
+                                                <input type="time" id="sftime" name="cpwd" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="md-form mb-0">
+                                                <input type="text" id="sroom" name="cpwd" class="form-control">
+                                                <label for="sroom" class="">Subject Room</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center text-md-center mt-4">
+                                        <small><strong>*Only accepts .csv format</strong></small><br>
+                                        <br>
+                                        <button type="button" id="fileBtn" class="btn btn-green"><i class="fa fa-upload"></i> Upload Students</button>
+                                        <div class="file-field input-field">
+                                            <input type="file" id="myFile" accept=".csv">
+                                            <div class="btn green" style="display:none;">
+                                                <span>Attacment</span>
+                                            </div>
+                                            <div class="input-field file-path-wrapper " style="display:none">
+                                                <input class="file-path" type="text" placeholder="@ e.g (.pdf)">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="text-center text-md-center mt-4">
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Add Subject</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!--Grid column-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!--Footer-->
+    <br><br><br><br>
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/stepper.js"></script>
+    <script type="text/javascript" src="js/jspdf.min.js"></script>
+
+
+    <script>
+        var url = "http://localhost";
+
+
+        let getIns = () => {
+            fetch(url + "/ojtapi/select/tbl_classes/fldInstructorID/1").then((resp) => resp.json()).then(function(data) {
+                let ls = "";
+                for (let i = 0; i < data.length; i++) {
+                    ls += '<tr>';
+                    ls += '<td>' + data[i].fldClassCode + '</td>';
+                    ls += '<td>' + data[i].fldSubjectID + '</td>';
+                    ls += '<td>' + data[i].fldSubjectTitle + '</td>';
+                    ls += '<td>' + data[i].fldSubjectDay + '</td>';
+                    ls += '<td>' + data[i].fldSubjecTime + '</td>';
+                    ls += '<td>' + data[i].fldSubjectRm + '</td>';
+                    ls += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect" onclick="setCcode('+data[i].fldClassCode+')">View</button></td>';
+                    ls += '</tr>';
+                }
+                $("#subjectList").html(ls);
+            });
+        }
+        
+        let setCcode = (val) =>{
+            localStorage.ccode = val;
+            window.location.assign("subjectinterface.html");
+        }
+
+        getIns();
+        let insertIns = () => {
+            fetch(url + "/ojtapi/insert/tbl_user", {
+                method: "POST",
+                body: JSON.stringify([x])
+            }).then(function(data) {
+                console.log(data);
+            });
+        }
+
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function(n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
+        }
+
+
+
+                $('#contact-form').on('submit', function(e) {
+                    e.preventDefault();
+                    let xscc = $("#ccode").val();
+                    let id = "1";
+                    let sc = $("#scode").val();
+                    let st = $("#stitle").val();
+                    let sd = $("#sday").val();
+                    let stime = $("#sttime").val() + " " + $("#sftime").val();
+                    let sr = $("#sroom").val();
+                   
+
+                    readAndSendChunk(xscc);
+                    
+                    let x = {
+                        "a": xscc,
+                        "b": id,
+                        "c": sc,
+                        "d": st,
+                        "e": sd,
+                        "f": stime,
+                        "g": sr,
+                    };
+
+                    fetch(url + "/ojtapi/insertnpk/tbl_classes", {
+                        method: "POST",
+                        body: JSON.stringify([x])
+                    }).then(function(data) {
+                        console.log(data);
+                    });
+                    
+                    window.alert("Class Added!");
+                });
+
+    </script>
+
+    <script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+        $('.mdb-select').material_select();
+        new WOW().init();
+
+    </script>
+    <script>
+        $('#fileBtn').click(function(e) {
+            e.preventDefault();
+            $('#myFile').trigger('click');
+        });
+
+
+
+        var reader_offset = 0; //current reader offset position
+        var buffer_size = 1024; //
+        var pending_content = '';
+
+        /**
+         * Read a chunk of data from current offset.
+         */
+        function readAndSendChunk(xval) {
+            var reader = new FileReader();
+
+            var file = $('#myFile')[0].files[0];
+            reader.onloadend = function(evt) {
+
+                //check for end of file
+                if (evt.loaded == 0) return;
+
+                //increse offset value
+                reader_offset += evt.loaded;
+
+                //check for only complete line
+                var last_line_end = evt.target.result.lastIndexOf('\n');
+                var content = pending_content + evt.target.result.substring(0, last_line_end);
+
+                pending_content = evt.target.result.substring(last_line_end + 1, evt.target.result.length);
+
+                //upload data
+                send(content, xval);
+            };
+            var blob = file.slice(reader_offset, reader_offset + buffer_size);
+            reader.readAsText(blob);
+        }
+
+        function send(data_chank, val) {
+            $.ajax({
+                url: url + "/ojtapi/upload.php?ccode=" + val,
+                method: 'POST',
+                data: data_chank
+            }).done(function(response) {
+
+                //try for next chank
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

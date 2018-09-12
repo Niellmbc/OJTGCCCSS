@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071) -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="assets/css/mdb.min.css" rel="stylesheet">
+
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <link href="assets/css/stepper.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+
+    <!--Double navigation-->
+    <header>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+
+                    <center>
+                        <img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
+                    </center>
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+
+                <!--/.Search Form-->
+                <!-- Side navigation links -->
+                <li>
+                    <hr>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="collapsible-header waves-effect active" href="registrar.html"><i class="fa fa-users"></i> Instructor Management</a>
+                        </li>
+                        <li><a class="collapsible-header waves-effect" href="company.html"><i class="fa fa-truck"></i> Company Management</a>
+                        </li>
+                        <li><a class="collapsible-header waves-effect" href="company.html"><i class="fa fa-sign-out"></i> Sign Out</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg mask-strong"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
+            </div>
+            <!-- breadcrumb-dn-->
+            <div class="breadcrumb-dn mr-auto white-text">
+                <p>On The Job Training for CCS | Registrar</p>
+            </div>
+        </nav>
+        <!-- /.Navbar -->
+    </header>
+    <!--/.Double navigation-->
+
+    <!--Main layout-->
+    <main>
+        <div class="row">
+            <div class="col-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs md-tabs nav-justified orange">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Pending Companies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Accepted Companies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#panel3" role="tab">Declined Companies</a>
+                    </li>
+                </ul>
+                <!-- Tab panels -->
+                <div class="tab-content card">
+                    <!--Panel 1-->
+                    <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+                        <br>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Email Address</th>
+                                            <th scope="col">Company Name</th>
+                                            <th scope="col">Company Address</th>
+                                            <th scope="col">Company Phone Number</th>
+                                            <th scope="col">Company Tel Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pendingList">
+                                        <tr>
+                                            <th scope="row">201510068</th>
+                                            <td>Jane Doe</td>
+                                            <td>BSIT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201512024</th>
+                                            <td>John Doe</td>
+                                            <td>BSCS</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201526684</th>
+                                            <td>Lorem Ipsum</td>
+                                            <td>ACT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Panel 1-->
+                    <!--Panel 2-->
+                    <div class="tab-pane fade " id="panel2" role="tabpanel">
+                        <br>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Email Address</th>
+                                            <th scope="col">Company Name</th>
+                                            <th scope="col">Company Address</th>
+                                            <th scope="col">Company Phone Number</th>
+                                            <th scope="col">Company Tel Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="acceptedList">
+                                        <tr>
+                                            <th scope="row">201510068</th>
+                                            <td>Jane Doe</td>
+                                            <td>BSIT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201512024</th>
+                                            <td>John Doe</td>
+                                            <td>BSCS</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201526684</th>
+                                            <td>Lorem Ipsum</td>
+                                            <td>ACT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Panel 2-->
+                    <!--Panel 2-->
+                    <div class="tab-pane fade " id="panel3" role="tabpanel">
+                        <br>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Email Address</th>
+                                            <th scope="col">Company Name</th>
+                                            <th scope="col">Company Address</th>
+                                            <th scope="col">Company Phone Number</th>
+                                            <th scope="col">Company Tel Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="declinedList">
+                                        <tr>
+                                            <th scope="row">201510068</th>
+                                            <td>Jane Doe</td>
+                                            <td>BSIT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201512024</th>
+                                            <td>John Doe</td>
+                                            <td>BSCS</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">201526684</th>
+                                            <td>Lorem Ipsum</td>
+                                            <td>ACT</td>
+                                            <td>CCS</td>
+                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!--Footer-->
+    <br><br><br><br>
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/stepper.js"></script>
+    <script type="text/javascript" src="js/jspdf.min.js"></script>
+
+
+    <script>
+        var url = "http://localhost";
+        
+        
+        
+        let acceptCompy = (val) =>{
+            let x = { "fldCompanyStatus":"Accepted" };
+            fetch(url + "/ojtapi/update/tbl_companies/fldCompanyID/"+val, {
+                method: "POST",
+                body: JSON.stringify([x])
+            })
+            window.alert("Company Accepted!");
+            window.location.assign("company.html");
+        }
+        
+        let declCompy = (val) =>{
+            let x = { "fldCompanyStatus":"Declined" };
+            fetch(url + "/ojtapi/update/tbl_companies/fldCompanyID/"+val, {
+                method: "POST",
+                body: JSON.stringify([x])
+            })
+            window.alert("Company Declined!");
+            window.location.assign("company.html");            
+        }
+
+
+        let getIns = () => {
+            fetch(url + "/ojtapi/select/tbl_companies/fldCompanyStatus/Pending").then((resp) => resp.json()).then(function(data) {
+                let ls = "";
+                for (let i = 0; i < data.length; i++) {
+                    ls += '<tr>';
+                    ls += '<td>' + data[i].fldEmailAddress + '</td>';
+                    ls += '<td>' + data[i].fldCompanyName + '</td>';
+                    ls += '<td>' + data[i].fldCompanyAddress + '</td>';
+                    ls += '<td>' + data[i].fldContactNo + '</td>';
+                    ls += '<td>' + data[i].fldTelNo + '</td>';
+                    ls += '<td><button type="button" onclick="acceptCompy('+data[i].fldCompanyID+')" class="btn btn-sm btn-outline-success waves-effect" >Accept</button><br><button type="button" onclick="declCompy('+data[i].fldCompanyID+')" class="btn btn-sm btn-outline-danger waves-effect">Decline</button></td>';
+                    ls += '</tr>';
+                }
+                $("#pendingList").html(ls);
+            });
+            
+            fetch(url + "/ojtapi/select/tbl_companies/fldCompanyStatus/Accepted").then((resp) => resp.json()).then(function(data) {
+                let ls = "";
+                for (let i = 0; i < data.length; i++) {
+                    ls += '<tr>';
+                    ls += '<td>' + data[i].fldEmailAddress + '</td>';
+                    ls += '<td>' + data[i].fldCompanyName + '</td>';
+                    ls += '<td>' + data[i].fldCompanyAddress + '</td>';
+                    ls += '<td>' + data[i].fldContactNo + '</td>';
+                    ls += '<td>' + data[i].fldTelNo + '</td>';
+                    ls += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>';
+                    ls += '</tr>';
+                }
+                $("#acceptedList").html(ls);
+            });
+            
+
+            fetch(url + "/ojtapi/select/tbl_companies/fldCompanyStatus/Declined").then((resp) => resp.json()).then(function(data) {
+                let ls = "";
+                for (let i = 0; i < data.length; i++) {
+                    ls += '<tr>';
+                    ls += '<td>' + data[i].fldEmailAddress + '</td>';
+                    ls += '<td>' + data[i].fldCompanyName + '</td>';
+                    ls += '<td>' + data[i].fldCompanyAddress + '</td>';
+                    ls += '<td>' + data[i].fldContactNo + '</td>';
+                    ls += '<td>' + data[i].fldTelNo + '</td>';
+                    ls += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>';
+                    ls += '</tr>';
+                }
+                $("#declinedList").html(ls);
+            });
+        }
+
+        getIns();
+        let insertIns = () => {
+            fetch(url + "/ojtapi/insert/tbl_user", {
+                method: "POST",
+                body: JSON.stringify([x])
+            }).then(function(data) {
+                console.log(data);
+            });
+        }
+
+        function getFormData($form) {
+            var unindexed_array = $form.serializeArray();
+            var indexed_array = {};
+
+            $.map(unindexed_array, function(n, i) {
+                indexed_array[n['name']] = n['value'];
+            });
+
+            return indexed_array;
+        }
+
+
+
+        $('#contact-form').on('submit', function(e) {
+            e.preventDefault();
+            let fn = $("#Fname").val();
+            let mn = $("#Mname").val();
+            let ln = $("#Lname").val();
+            let em = $("#Email").val();
+            let pw = $("#pwd").val();
+            let cpw = $("#cpwd").val();
+
+            let x = {
+                "a": fn,
+                "b": ln,
+                "c": mn,
+                "d": em,
+                "e": pw
+            };
+
+            if (cpw == pw) {
+                fetch(url + "/ojtapi/insert/tbl_instructors", {
+                    method: "POST",
+                    body: JSON.stringify([x])
+                }).then(function(data) {
+                    console.log(data);
+                });
+                window.alert("Instructor Added!");
+                window.location.assign("registrar.html");
+            } else {
+                window.alert("Password didn't Match")
+            }
+        });
+
+    </script>
+
+    <script>
+        // SideNav Initialization
+        $(".button-collapse").sideNav();
+        $('.mdb-select').material_select();
+        new WOW().init();
+
+    </script>
+    <script>
+
+
+    </script>
+
+</body>
+
+</html>
