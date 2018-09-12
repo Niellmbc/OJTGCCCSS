@@ -94,7 +94,7 @@
 
     <script>
         let studentId = "201610365";
-        let myurl = "http://localhost";
+        let myurl = "http://gordoncollegeccs-ssite.net";
 
 
         $.ajaxSetup({
@@ -167,18 +167,20 @@
                 c: "Requested by Student"
             };
 
-            
-            if(availReq > 0){
+
+            if (availReq > 0) {
                 fetch(myurl + "/ojtapi/insert/tbl_pendings/", {
                     method: "POST",
                     body: JSON.stringify([x])
+                }).then(function(data) {
+
+                    $("#" + myID).html("Cancel Request");
+                    $("#" + myID).removeClass("btn-primary").addClass("btn-outline-danger");
+
+                    window.location.assign("companies.html");
                 });
 
 
-                $("#" + myID).html("Cancel Request");
-                $("#" + myID).removeClass("btn-primary").addClass("btn-outline-danger");
-
-                window.location.assign("companies.html");
             } else {
                 window.alert("Sorry but you already sen't the maximum number of request");
             }
@@ -188,14 +190,17 @@
 
 
 
-            fetch(myurl + "/ojtapi/delete/tbl_pendings/fldTransactionID/" + getTransactionID(val, studentId));
+            fetch(myurl + "/ojtapi/delete/tbl_pendings/fldTransactionID/" + getTransactionID(val, studentId)).then(function(data) {
+                $("#" + myID).html("Apply Here");
+                $("#" + myID).removeClass("btn-outline-danger").addClass("btn-primary");
 
 
-            $("#" + myID).html("Apply Here");
-            $("#" + myID).removeClass("btn-outline-danger").addClass("btn-primary");
+                window.location.assign("companies.html");
+
+            });
 
 
-            window.location.assign("companies.html");
+
         }
 
     </script>

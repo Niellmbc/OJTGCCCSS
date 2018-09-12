@@ -1,4 +1,4 @@
-        let myurl = "http://localhost/"
+        let myurl = "http://gordoncollegeccs-ssite.net"
         let data = {
             "objective": "",
             "personalInfo": {
@@ -212,7 +212,7 @@
             let x = {
                 fldResume: val
             };
-            fetch(myurl + "/ojtapi/update/tbl_students/fldStudentID/201310965", {
+            fetch(myurl + "/ojtapi/update/tbl_students/fldStudentID/201610365", {
                 method: "POST",
                 body: JSON.stringify([x])
             });

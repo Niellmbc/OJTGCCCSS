@@ -6,12 +6,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="company/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="assets/css/mdb.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.css" rel="stylesheet">
-    <link href="assets/css/stepper.css" rel="stylesheet">
+    <link href="company/assets/css/mdb.min.css" rel="stylesheet">
+    <link href="company/assets/css/style.css" rel="stylesheet">
+    <link href="company/assets/css/font-awesome.css" rel="stylesheet">
+    <link href="company/assets/css/stepper.css" rel="stylesheet">
 </head>
 
 <body class="login" data-gr-c-s-loaded="true">
@@ -31,7 +31,7 @@
                         <!-- Default form subscription -->
                         <form>
                             <div class="flex-center" class="rad">
-                                <img src="assets/img/mdb-transparent.png" class="rad" width="100px">
+                                <img src="company/assets/img/mdb-transparent.png" class="rad" width="100px">
                             </div>    
                             
                             <!-- Default input name -->
@@ -65,15 +65,44 @@
 
     <!--Footer-->
     <br><br><br><br>
-    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script type="text/javascript" src="js/Chart.min.js"></script>
-    <script type="text/javascript" src="js/Chart.bundle.min.js"></script>
-    <script type="text/javascript" src="js/stepper.js"></script>
+    <script type="text/javascript" src="company/js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="company/js/popper.min.js"></script>
+    <script type="text/javascript" src="company/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="company/js/mdb.min.js"></script>
+    <script type="text/javascript" src="company/js/Chart.min.js"></script>
+    <script type="text/javascript" src="company/js/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="company/js/stepper.js"></script>
     <script>
         // SideNav Initialization
+        let myurl = "http://gordoncollegeccs-ssite.net";
+        let un = $("#un").val();
+        let pw = $("#pw").val();
+        
+        let login = () =>{
+            let x = {
+                un: un,
+                pw: pw
+            }
+            
+            fetch(myurl + "/ojtapi/login", {
+                method: "POST",
+                body: JSON.stringify(x)
+            }).then(function(data){
+                if(data.Authorize == "Company"){
+                    window.location.assign("company/company.html");
+                } else if (data.Authorize == "Instructor"){
+                    window.location.assign("instructor/subject.html");
+                } else if (data.Authorize == "Student"){
+                    window.location.assign("student/accounts.html");
+                } else {
+                    if(un == "Admin" && pw == "Admin"){
+                        window.location.assign("registrar/company.html");
+                    } else {
+                        window.alert("Invalid login credentials");
+                    }
+                }
+            });
+        }
         $(".button-collapse").sideNav();
         $('.mdb-select').material_select();
         new WOW().init();

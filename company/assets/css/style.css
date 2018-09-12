@@ -1,9 +1,8 @@
+
 .login{
-  /*  background-image: url('../img/bg.png');*/
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: grey;
-    background-blend-mode: multiply;
+    background-color: orange;
 }
 
 .rad{
