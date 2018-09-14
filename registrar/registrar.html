@@ -1,301 +1,190 @@
 <!DOCTYPE html>
-<!-- saved from url=(0071) -->
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Material Design Bootstrap -->
-    <link href="assets/css/mdb.min.css" rel="stylesheet">
-
-    <link href="assets/css/font-awesome.css" rel="stylesheet">
-    <link href="assets/css/stepper.css" rel="stylesheet">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./assets/css/mdb.min.css" rel="stylesheet">
+	<link href="./assets/css/font-awesome.css" rel="stylesheet">
+	<link href="./assets/css/stepper.css" rel="stylesheet">
 </head>
 
 <body class="fixed-sn white-skin" data-gr-c-s-loaded="true">
+	<header>
+		<div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
+			<ul class="custom-scrollbar center">
+				<li><img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
+				</li>
+				<li>
+					<hr>
+					<ul class="collapsible collapsible-accordion">
+						<li><a class="collapsible-header waves-effect active" href="registrar.html"><i class="fa fa-users"></i> Instructor Management</a>
+						</li>
+						<li><a class="collapsible-header waves-effect" href="company.html"><i class="fa fa-truck"></i> Company Management</a>
+						</li>
+						<li><a class="collapsible-header waves-effect" href="company.html"><i class="fa fa-sign-out"></i> Sign Out</a>
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+			<div class="sidenav-bg mask-strong"></div>
+		</div>
 
-    <!--Double navigation-->
-    <header>
-        <!-- Sidebar navigation -->
-        <div id="slide-out" class="side-nav fixed" style="transform: translateX(0%);">
-            <ul class="custom-scrollbar">
-                <!-- Logo -->
-                <li>
+		<nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
+			<div class="float-left">
+				<a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
+			</div>
+			<div class="breadcrumb-dn mr-auto white-text">
+				<p>On The Job Training for CCS | Registrar</p>
+			</div>
+		</nav>
 
-                    <center>
-                        <img src="assets/img/mdb-transparent.png" class="img-fluid flex-center" style="border-radius: 100%" width="150px">
-                    </center>
-                </li>
-                <!--/. Logo -->
-                <!--Social-->
+	</header>
 
-                <!--/.Search Form-->
-                <!-- Side navigation links -->
-                <li>
-                    <hr>
-                    <ul class="collapsible collapsible-accordion">
-                            <li><a class="collapsible-header waves-effect active" href="registrar.html"><i class="fa fa-users"></i> Instructor Management</a>
-                            </li>
-                            <li><a class="collapsible-header waves-effect" href="company.html"><i class="fa fa-truck"></i> Company Management</a>
-                            </li>
-                            <li><a class="collapsible-header waves-effect" href="company.html"><i class="fa fa-sign-out"></i> Sign Out</a>
-                            </li>
-                        
-                    </ul>
-                    </li>
-                    <!--/. Side navigation links -->
-            </ul>
-            <div class="sidenav-bg mask-strong"></div>
-        </div>
-        <!--/. Sidebar navigation -->
-        <!-- Navbar -->
-        <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" style="background-color: #ffa100">
-            <!-- SideNav slide-out button -->
-            <div class="float-left">
-                <a href="#" data-activates="slide-out" class="button-collapse white-text"><i class="fa fa-bars"></i></a>
-            </div>
-            <!-- breadcrumb-dn-->
-            <div class="breadcrumb-dn mr-auto white-text">
-                <p>On The Job Training for CCS | Registrar</p>
-            </div>
-        </nav>
-        <!-- /.Navbar -->
-    </header>
-    <!--/.Double navigation-->
-
-    <!--Main layout-->
-    <main>
-        <div class="row">
-            <div class="col-12">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs md-tabs nav-justified orange">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Instructor List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Add Instructor</a>
-                    </li>
-                </ul>
-                <!-- Tab panels -->
-                <div class="tab-content card">
-                    <!--Panel 1-->
-                    <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
-                        <br>
-                        <div class="col-12">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Instructor Name</th>
-                                            <th scope="col">Full Name</th>
-                                            <th scope="col">Email Address</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="instructorList">
-                                        <tr>
-                                            <th scope="row">201510068</th>
-                                            <td>Jane Doe</td>
-                                            <td>BSIT</td>
-                                            <td>CCS</td>
-                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">201512024</th>
-                                            <td>John Doe</td>
-                                            <td>BSCS</td>
-                                            <td>CCS</td>
-                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">201526684</th>
-                                            <td>Lorem Ipsum</td>
-                                            <td>ACT</td>
-                                            <td>CCS</td>
-                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/.Panel 1-->
-                    <!--Panel 2-->
-                    <div class="tab-pane fade " id="panel2" role="tabpanel">
-                        <br>
-                        <div class="row">
-                            <div class="col-md-3 mb-md-0 mb-5">
-                                <div class="card testimonial-card">
-                                    <!-- Bacground color -->
-                                    <div class="card-up indigo lighten-1">
-                                    </div>
-
-                                    <!-- Avatar -->
-                                    <div class="avatar mx-auto white"><img src="https://scontent.fmnl17-1.fna.fbcdn.net/v/t1.0-9/30594962_1848680835156102_6696431825004265472_n.jpg?_nc_cat=0&_nc_eui2=AeH39hjoUk4cJjwmui9Imtf55WIa68TPElH5pJfz-mrcy6bk4EMa23jzM6-ipyUX9sx9XwOw5Dig-zeYu14yTxs0JDDgKuC0UU-lyV20dniupA&oh=5a1867171b44313e32e064c0918d2c93&oe=5BFCFB0A" class="rounded-circle">
-                                    </div>
-
-                                    <div class="card-body">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-9 mb-md-0 mb-5">
-                                <form id="contact-form" name="contact-form">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="md-form mb-0">
-                                                <input type="text" id="Fname" name="aame" class="form-control">
-                                                <label for="name" class="">Firstname</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="md-form mb-0">
-                                                <input type="text" id="Mname" name="bame" class="form-control">
-                                                <label for="name" class="">Middlename</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="md-form mb-0">
-                                                <input type="text" id="Lname" name="came" class="form-control">
-                                                <label for="name" class="">Lastname</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="md-form mb-0">
-                                                <input type="text" id="Email" name="dsername" class="form-control">
-                                                <label for="text" class="">Email Address</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="md-form mb-0">
-                                                <input type="text" id="pwd" name="pwd" class="form-control">
-                                                <label for="password" class="">Password</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="md-form mb-0">
-                                                <input type="text" id="cpwd" name="cpwd" class="form-control">
-                                                <label for="email" class="">Confirm Password</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center text-md-center mt-4">
-                                        <button class="btn btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Add Instructor</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                            <!--Grid column-->
-                        </div>
-                    </div>
-                    <!--/.Panel 2-->
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!--Footer-->
-    <br><br><br><br>
-    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script type="text/javascript" src="js/stepper.js"></script>
-    <script type="text/javascript" src="js/jspdf.min.js"></script>
-
-
-    <script>
-        var url = "http://gordoncollegeccs-ssite.net";
- 
-        
-        let getIns = () => {
-            fetch(url+"/ojtapi/select/tbl_instructors").then((resp)=>resp.json()).then(function(data){
-                let ls = "";
-                for(let i = 0; i < data.length;i++){
-                    ls += '<tr>';
-                    ls += '<td>' + data[i].fldInstructorID + '</td>';
-                    ls += '<td>' + data[i].fldFname + ' ' + data[i].fldMname + ' ' + data[i].fldLname + ' ' + '</td>';
-                    ls += '<td>' + data[i].fldEmailAddress + '</td>';
-                    ls += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Delete</button></td>';
-                    ls += '</tr>';
-                }
-                $("#instructorList").html(ls);
-            });
-        }
-        
-        getIns();
-        let insertIns = () => {
-            fetch(url + "/ojtapi/insert/tbl_user", {
-                method: "POST",
-                body: JSON.stringify([x])
-            }).then(function(data) {
-                console.log(data);
-            });
-        }
-
-        function getFormData($form) {
-            var unindexed_array = $form.serializeArray();
-            var indexed_array = {};
-
-            $.map(unindexed_array, function(n, i) {
-                indexed_array[n['name']] = n['value'];
-            });
-
-            return indexed_array;
-        }
-
-
-
-        $('#contact-form').on('submit', function(e) {
-            e.preventDefault();
-            let fn = $("#Fname").val();
-            let mn = $("#Mname").val();
-            let ln = $("#Lname").val();
-            let em = $("#Email").val();
-            let pw = $("#pwd").val();
-            let cpw = $("#cpwd").val();
-            
-            let x = { "a":fn, "b":ln, "c":mn, "d":em, "e":pw};  
-
-            if (cpw == pw) {
-                fetch(url + "/ojtapi/insert/tbl_instructors", {
-                    method: "POST",
-                    body: JSON.stringify([x])
-                }).then(function(data) {
-                    console.log(data);
-                });
-                window.alert("Instructor Added!");
-                window.location.assign("registrar.html");
-            } else {
-                window.alert("Password didn't Match")
-            }
-        });
-        
-        
-
-    </script>
-
-    <script>
-        // SideNav Initialization
-        $(".button-collapse").sideNav();
-        $('.mdb-select').material_select();
-        new WOW().init();
-
-    </script>
-    <script>
-
-
-    </script>
-
+	<main>
+		<div class="row">
+			<div class="col-12">
+				<ul class="nav nav-tabs md-tabs nav-justified orange">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">Instructor List</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Add Instructor</a>
+					</li>
+				</ul>
+				<div class="tab-content card">
+					<div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+						<br>
+						<div class="col-12">
+							<div class="table-responsive">
+								<table class="table table-hover text-center">
+									<thead>
+										<tr>
+											<th scope="col">Instructor No.</th>
+											<th scope="col">Full Name</th>
+											<th scope="col">Email Address</th>
+											<th scope="col">Action</th>
+										</tr>
+									</thead>
+									<tbody id="instructorList"></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade " id="panel2" role="tabpanel">
+						<br>
+						<div class="row">
+							<div class="col-md-3 mb-md-0 mb-5">
+								<div class="card testimonial-card">
+									<div class="card-up indigo lighten-1">
+									</div>
+									<div class="avatar mx-auto white"><img src="https://scontent.fmnl17-1.fna.fbcdn.net/v/t1.0-9/30594962_1848680835156102_6696431825004265472_n.jpg?_nc_cat=0&_nc_eui2=AeH39hjoUk4cJjwmui9Imtf55WIa68TPElH5pJfz-mrcy6bk4EMa23jzM6-ipyUX9sx9XwOw5Dig-zeYu14yTxs0JDDgKuC0UU-lyV20dniupA&oh=5a1867171b44313e32e064c0918d2c93&oe=5BFCFB0A" class="rounded-circle">
+									</div>
+									<div class="card-body"></div>
+								</div>
+							</div>
+							<div class="col-md-9 mb-md-0 mb-5">
+								<form id="contact-form" name="contact-form">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="md-form mb-0">
+												<input type="text" id="Fname" name="a" class="form-control" required />
+												<label for="Fname">Firstname</label>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="md-form mb-0">
+												<input type="text" id="Mname" name="b" class="form-control" required />
+												<label for="Mname">Middlename</label>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="md-form mb-0">
+												<input type="text" id="Lname" name="c" class="form-control" required />
+												<label for="Lname" >Lastname</label>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="md-form mb-0">
+												<input type="email" id="Email" name="d" class="form-control" required />
+												<label for="Email" >Email Address</label>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="md-form mb-0">
+												<input type="password" id="pwd" name="e" class="form-control" required />
+												<label for="pwd" class="">Password</label>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="md-form mb-0">
+												<input type="password" id="cpwd" class="form-control" required />
+												<label for="cpwd" class="">Confirm Password</label>
+											</div>
+										</div>
+									</div>
+									<div class="text-center text-md-center mt-4">
+										<button class="btn btn-primary" type="submit"><i class="fa fa-plus-circle"></i> Add Instructor</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<script src="./js/jquery-3.2.0.min.js"></script>
+	<script src="./js/popper.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/mdb.min.js"></script>
+	<script src="./js/init.js"></script>
+	<script>
+		$(document).ready(function() {
+			getIns();
+			$('#contact-form').submit(function(e) {
+				e.preventDefault();
+				let form = getFormData($(this));
+				let pw = $('#pwd');
+				let cpw = $('#cpwd');
+				if (pw.val() === cpw.val()) {
+					fetch(url + "/ojtapi/insert/tbl_instructors", { method: "POST", body: JSON.stringify([form]) }).then(function(data) {
+						toastr.success('Instructor Added!', '',{timeOut: 3000}).then(location.reload());
+					});
+				} else {
+					toastr.error('Password did not match!');
+					pw.val("");
+					cpw.val("");
+					return false;
+				}
+			});
+		});
+		let getIns = () => {
+			fetch(url+"/ojtapi/tbl_instructors").then((resp)=>resp.json()).then(function(data){
+				let ls = ``;
+				data.forEach(function(instructor) {
+					ls += `<tr>`;
+					ls += `<td>${ instructor.fldInstructorID }</td>`;
+					ls += `<td>  ${instructor.fldFname} ${instructor.fldMname} ${instructor.fldLname}</td>`;
+					ls += `<td class="blue-text">${instructor.fldEmailAddress}</td>`;
+					ls += `<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">Edit</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect" onclick="delInstructor(${instructor.fldInstructorID})">Remove</button></td>`;
+					ls += '</tr>';
+				});
+				$("#instructorList").html(ls);
+			});
+		}
+		function delInstructor(id){
+			fetch(url + "/ojtapi/delete/tbl_instructors/fldInstructorID/"+id, { method: "POST" }).then(function(data) {
+				getIns();
+				toastr.success('Instructor Removed!')
+			});
+		}
+	</script>
 </body>
 
 </html>
