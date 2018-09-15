@@ -71,7 +71,7 @@ const CompanyHire = (studsid) =>{
 const compSelectStudList = () =>{
 	let studid = localStorage.studsid;
 	let compId = 1;
-	fetch(myurl+"/ojtapi/tbl_pendings/fldStudentID/tbl_students/fldStudentID").then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_pendings/fldStudentID/tbl_students/fldStudentID?select=tbl_pendings.fldCompanyID, tbl_pendings.fldRemarks, tbl_students.fldStudentID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldCourse").then((res)=>res.json()).then(function(data){
 		console.log(data);
 		let longstring1 = "";
 		let longstring2 = "";
@@ -238,7 +238,7 @@ const updateAccount = () =>{
 const attendanceStud = () =>{
 	let companyID = 1;
 
-	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
+	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldStudentID, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldLname').then((res)=>res.json()).then(function(data){
 
 		studentTab = "";
 		studentRec = "";
@@ -306,7 +306,7 @@ let remarks = [];
 const checkAttendance = () =>{
 	companyID =1 ;
 	check = "";
-	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
+	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname').then((res)=>res.json()).then(function(data){
 		for(let i =0;i<data.length;i++){
 			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
 				check +="<input type='text' id='ids"+i+"' value='"+data[i].fldStudentID+"' hidden/>";

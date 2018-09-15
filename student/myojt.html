@@ -186,7 +186,7 @@
         let studentId = localStorage.studentId;
 
         let getSent = () => {
-            fetch(url + "/ojtapi/select/tbl_pendings/fldStudentID/" + studentId).then((resp) => resp.json()).then(function(data) {
+            fetch(url + "/ojtapi/tbl_pendings/fldStudentID/" + studentId).then((resp) => resp.json()).then(function(data) {
                 let ls_f = "";
                 let ls_s = "";
                 for (let i = 0; i < data.length; i++) {
@@ -273,7 +273,7 @@
 
         $("#pendingStudent").css("display", "none");
         $("#hiredStudent").css("display", "none");
-        fetch(url + "/ojtapi/select/tbl_students/fldStudentID/" + studentId).then((res) => res.json()).then(function(data) {
+        fetch(url + "/ojtapi/tbl_students/fldStudentID/" + studentId).then((res) => res.json()).then(function(data) {
             if (data[0].fldStatus == "Hired") {
                 $("#pendingStudent").css("display", "none");
                 $("#hiredStudent").css("display", "block");
@@ -285,7 +285,7 @@
         });
         
         const selDtr = () => {
-            fetch(url + "/ojtapi/select/tbl_dtr/fldStudentID/"+studentId).then((res)=>res.json()).then(function(data){
+            fetch(url + "/ojtapi/tbl_dtr/fldStudentID/"+studentId).then((res)=>res.json()).then(function(data){
                 let ls = '';
                 
                 for(let i = 0; i < data.length;i++){

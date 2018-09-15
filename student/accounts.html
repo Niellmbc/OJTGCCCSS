@@ -146,7 +146,7 @@
         
         let myurl = "http://gordoncollegeccs-ssite.net";
         
-        fetch(myurl + "/ojtapi/select/tbl_students/fldStudentID/"+localStorage.studentId).then((res)=>res.json()).then(function(data){
+        fetch(myurl + "/ojtapi/tbl_students/fldStudentID/"+localStorage.studentId).then((res)=>res.json()).then(function(data){
             $("#stname").html(data[0].fldFname + " " + data[0].fldMname + " " + data[0].fldLname);
             $("#stid").html(data[0].fldStudentID);
             $("#stcourse").html(data[0].fldCourse);

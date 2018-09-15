@@ -144,7 +144,7 @@
         let join=[];
         let companyID =1;
         function getIT(){
-          $.getJSON(myurl +"/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID",function(data){
+          $.getJSON(myurl +"/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldCompanyID, tbl_students.fldStudentID, tbl_students.fldStatus",function(data){
             join = data;
           });
         }
@@ -157,7 +157,7 @@
           }
           return false;
         }
-        fetch(myurl+"/ojtapi/tbl_students/fldStatus/Available").then((res) =>res.json()).then(function(data){
+        fetch(myurl+"/ojtapi/tbl_students/fldStatus/Available?select=fldFname, fldLname, fldMname, fldStatus, fldStudentID").then((res) =>res.json()).then(function(data){
           let longstring = "";
           for(let i = 0;i < data.length ; i++){
 
