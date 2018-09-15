@@ -7,11 +7,12 @@ $.ajaxSetup({
 let arr = [];
 
 function data(){
-	$.getJSON(myurl +"/ojtapi/select/tbl_pendings",function(data){
+	$.getJSON(myurl +"/ojtapi/tbl_pendings",function(data){
 		arr = data;
 	});
 }
 data();
+
 function compareData(compID,stdID){
 	for (let i = 0; i < arr.length; i++) {
 		if(arr[i].fldCompanyID == compID && arr[i].fldStudentID == stdID){
@@ -23,6 +24,7 @@ function compareData(compID,stdID){
 
 }
 
+
 const viewStud = (id) =>{	
 	localStorage.id = id;
 	window.location.assign('viewapplicant.html');
@@ -30,7 +32,7 @@ const viewStud = (id) =>{
 
 const viewApplicant = () =>{
 	let id = localStorage.id;
-	fetch(myurl+"/ojtapi/select/tbl_students/fldStudentID/"+id).then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_students/fldStudentID/"+id).then((res)=>res.json()).then(function(data){
 		document.getElementById('picpath').setAttribute('src',data[0].fldImage);
 		document.getElementById('myname').innerHTML = data[0].fldFname+' '+data[0].fldMname+' '+data[0].fldLname;
 		document.getElementById('resume').innerHTML = "<embed src='"+data[0].fldResume+"' width='800' height='800'>";
@@ -38,7 +40,7 @@ const viewApplicant = () =>{
 }
 const viewCompanyPro = () =>{
 	let id =1;
-	fetch(myurl+"/ojtapi/select/tbl_companies/fldCompanyID/"+id).then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_companies/fldCompanyID/"+id).then((res)=>res.json()).then(function(data){
 		// localStorage.compId=data[0].fldCompanyID;
 		document.getElementById('companyName').innerHTML = data[0].fldCompanyName;
 		document.getElementById('compEmail').value = data[0].fldEmailAddress;
@@ -69,7 +71,7 @@ const CompanyHire = (studsid) =>{
 const compSelectStudList = () =>{
 	let studid = localStorage.studsid;
 	let compId = 1;
-	fetch(myurl+"/ojtapi/join/tbl_pendings/fldStudentID/tbl_students/fldStudentID").then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_pendings/fldStudentID/tbl_students/fldStudentID").then((res)=>res.json()).then(function(data){
 		console.log(data);
 		let longstring1 = "";
 		let longstring2 = "";
@@ -106,7 +108,9 @@ const ApproveRequest = (studentID) =>{
 	let approve = {
 		fldStatus : "Hired"
 	}
-	fetch(myurl+"/ojtapi/delete/tbl_pendings/fldStudentID/"+studentID).then(function(data){
+	fetch(myurl+"/ojtapi/delete/tbl_pendings/fldStudentID/"+studentID,{
+		method:"POST"
+	}).then(function(data){
 		fetch(myurl+ "/ojtapi/insert/tbl_pendings",{
 			method:"POST",
 			body:JSON.stringify([hireDet])
@@ -133,20 +137,24 @@ const HiredApplicantByView = () =>{
 	$('#buts').html(longstring);
 } 
 const cancelInvitation = (transactionID) =>{
-	fetch(myurl +"/ojtapi/delete/tbl_pendings/fldTransactionID/"+transactionID).then(function(data){
+	fetch(myurl +"/ojtapi/delete/tbl_pendings/fldTransactionID/"+transactionID,{
+		method:"POST"
+	}).then(function(data){
 		toastr.info('You have canceled the Invitation Sent');
-	});
 	window.location.assign('company.html');
+	});
 }
 const cancelInvites = (transactionID) =>{
-	fetch(myurl +"/ojtapi/delete/tbl_pendings/fldTransactionID/"+transactionID).then(function(data){
+	fetch(myurl +"/ojtapi/delete/tbl_pendings/fldTransactionID/"+transactionID,{
+		method:"POST"
+	}).then(function(data){
 		toastr.info('You have canceled the Invitation Sent');
+		window.location.assign('applicantlist.html');
 	});
-	window.location.assign('applicantlist.html');
 }
 
 const searchStud = (val) => {
-	fetch(myurl+"/ojtapi/select/tbl_students/fldCourse/"+val).then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_students/fldCourse/"+val).then((res)=>res.json()).then(function(data){
 		let longstring = "";
 		for(let i =0; i < data.length;i++){
 			if(data[i].fldStatus=='Available'){
@@ -177,7 +185,7 @@ const searchStud = (val) => {
 }
 const findStud = () => {
 	let findme = document.getElementById('findme').value;
-	fetch(myurl+"/ojtapi/like/tbl_students/fldLname/"+findme).then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_students?LIKE=fldLname "+findme).then((res)=>res.json()).then(function(data){
 		let longstring = "";
 		for(let i =0; i < data.length;i++){
 			longstring +="<div class='col-md-4'>";
@@ -212,7 +220,7 @@ const updateAccount = () =>{
 		fldEmailAddress :newEmail,
 		fldPassword : newPass 
 	}
-	fetch(myurl +'/ojtapi/select/tbl_companies').then((res)=>res.json()).then(function(data){
+	fetch(myurl +'/ojtapi/tbl_companies').then((res)=>res.json()).then(function(data){
 		if(data[0].fldPassword == currPass){
 			if(newPass == confirmPass){
 
@@ -230,7 +238,7 @@ const updateAccount = () =>{
 const attendanceStud = () =>{
 	let companyID = 1;
 
-	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
+	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
 
 		studentTab = "";
 		studentRec = "";
@@ -279,7 +287,7 @@ const attendanceStud = () =>{
 }
 const getID = (id) =>{
 	
-	fetch(myurl+'/ojtapi/select/tbl_dtr/fldStudentID/'+id).then((res)=> res.json()).then(function (data){
+	fetch(myurl+'/ojtapi/tbl_dtr/fldStudentID/'+id).then((res)=> res.json()).then(function (data){
 		dtrStud = "";
 		for(let i =0 ;i<data.length;i++){
 			dtrStud +="<tr>";
@@ -298,7 +306,7 @@ let remarks = [];
 const checkAttendance = () =>{
 	companyID =1 ;
 	check = "";
-	fetch(myurl+'/ojtapi/join/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
+	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID').then((res)=>res.json()).then(function(data){
 		for(let i =0;i<data.length;i++){
 			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
 				check +="<input type='text' id='ids"+i+"' value='"+data[i].fldStudentID+"' hidden/>";
