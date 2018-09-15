@@ -212,7 +212,7 @@
             let x = {
                 fldResume: val
             };
-            fetch(myurl + "/ojtapi/update/tbl_students/fldStudentID/201610365", {
+            fetch(myurl + "/ojtapi/update/tbl_students/fldStudentID/"+localStorage.studentId, {
                 method: "POST",
                 body: JSON.stringify([x])
             });

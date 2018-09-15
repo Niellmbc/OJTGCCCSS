@@ -248,7 +248,7 @@
 
 
         let getIns = () => {
-            fetch(url + "/ojtapi/select/tbl_classes/fldInstructorID/1").then((resp) => resp.json()).then(function(data) {
+            fetch(url + "/ojtapi/tbl_classes/fldInstructorID/1").then((resp) => resp.json()).then(function(data) {
                 let ls = "";
                 for (let i = 0; i < data.length; i++) {
                     ls += '<tr>';

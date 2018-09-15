@@ -99,7 +99,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="sentList" class="text-center">
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -121,7 +121,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="reqList" class="text-center">
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -129,9 +129,9 @@
                     </div>
                 </div>
             </div>
-            
-            
-            <div class="container text-center" style="display: none">
+
+
+            <div class="container text-center" id="hiredStudent">
                 <!--Card-->
                 <div class="card wow fadeIn animated card-cascade reverse">
                     <div class="row">
@@ -140,10 +140,22 @@
                             <h4><i class="fa fa-dashboard"></i> Company DTR</h4>
                         </div>
                         <!--Card content-->
-                        <div class="col-md-12 card wow fadeIn animated card-cascade reverse" style="padding: 7%;">
+                        <div class="col-md-12 card wow fadeIn animated card-cascade reverse" style="padding: 3%;">
 
                             <!-- Stepper -->
-                            <h1>Not Yet Available</h1>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time In</th>
+                                        <th>Time Out</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dtrList">
+                                
+                                </tbody>
+                            </table>
 
 
                         </div>
@@ -171,7 +183,7 @@
 
     <script>
         var url = "http://gordoncollegeccs-ssite.net";
-        let studentId = "201610365";
+        let studentId = localStorage.studentId;
 
         let getSent = () => {
             fetch(url + "/ojtapi/select/tbl_pendings/fldStudentID/" + studentId).then((resp) => resp.json()).then(function(data) {
@@ -184,13 +196,13 @@
                         ls_f += '<td>Pending</td>';
                         ls_f += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Cancel</button></td>';
                         ls_f += '</tr>';
-                        
+
                     } else {
                         ls_s += '<tr>';
                         ls_s += '<td>' + data[i].fldCompanyID + '</td>';
                         ls_s += '<td>Pending</td>';
                         ls_s += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-success waves-effect"><i class="fa fa-check"></i> Accept</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Decline</button></td>';
-                        ls_s += '</tr>';                        
+                        ls_s += '</tr>';
                     }
                 }
                 $("#sentList").html(ls_f);
@@ -258,6 +270,36 @@
 
             window.alert("Class Added!");
         });
+
+        $("#pendingStudent").css("display", "none");
+        $("#hiredStudent").css("display", "none");
+        fetch(url + "/ojtapi/select/tbl_students/fldStudentID/" + studentId).then((res) => res.json()).then(function(data) {
+            if (data[0].fldStatus == "Hired") {
+                $("#pendingStudent").css("display", "none");
+                $("#hiredStudent").css("display", "block");
+                selDtr();
+            } else {
+                $("#pendingStudent").css("display", "block");
+                $("#hiredStudent").css("display", "none");
+            }
+        });
+        
+        const selDtr = () => {
+            fetch(url + "/ojtapi/select/tbl_dtr/fldStudentID/"+studentId).then((res)=>res.json()).then(function(data){
+                let ls = '';
+                
+                for(let i = 0; i < data.length;i++){
+                    ls += '<tr>';
+                    ls += '<td>'+data[i].fldDate+'</td>';
+                    ls += '<td>'+data[i].fldTimeIn+'</td>';
+                    ls += '<td>'+data[i].fldTimeOut+'</td>';
+                    ls += '<td>'+data[i].fldRemarks+'</td>';
+                    ls += '</tr>';
+                }
+                
+                $("#dtrList").html(ls)
+            });
+        }
 
     </script>
 

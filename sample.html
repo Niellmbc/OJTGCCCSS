@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<h1 id="output"></h1>
+    <input type="number" onblur="myfunction()">
+    <input type="button" value="asd">
+    
+    
+<script>
+
+function myfunction(){
+    window.alert("raniel baog");
+}    
+    
+let url = "http://gordoncollegeccs-ssite.net";
+    
+let stNo = "1231";
+/*fetch(url + "/pracapi/tbl_students/fldStudentID/" + stNo).then((res)=>res.json()).then(function(data){
+    console.log(data);
+});*/
+    
+
+const insertDtr = () => {
+
+    fetch(url + "/ojtapi/tbl_classes/fldClassCode/"+ stNo, {
+        method:"DELETE"
+    });
+}
+
+insertDtr();
+
+
+
+    
+    
+/*let callMe = () =>{
+    fetch(url+"/practiceapi/test",{
+        method: "DELETE"
+    }).then(function(data){
+        console.log(data);
+    });    
+}*/
+
+
+
+/*
+let samVar = {};
+samVar.Address = { "Barangay":"EBB" }
+localStorage.myDB = JSON.stringify(samVar);
+let parsedJSON = JSON.parse(localStorage.myDB);  
+console.log(parsedJSON);
+*/
+    
+</script>
+</body>
+</html>

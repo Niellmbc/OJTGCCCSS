@@ -32,8 +32,8 @@
                         <form>
                             <div class="flex-center" class="rad">
                                 <img src="company/assets/img/mdb-transparent.png" class="rad" width="100px">
-                            </div>    
-                            
+                            </div>
+
                             <!-- Default input name -->
                             <label for="un" class="grey-text font-weight-light">Username</label>
                             <input type="text" id="un" class="form-control">
@@ -75,27 +75,31 @@
     <script>
         // SideNav Initialization
         let myurl = "http://gordoncollegeccs-ssite.net";
-        let un = $("#un").val();
-        let pw = $("#pw").val();
-        
-        let login = () =>{
-            let x = {
-                un: un,
-                pw: pw
-            }
+
+
+        let login = () => {
+
+            let xun = $("#un").val();
+            let xpw = $("#pw").val();
             
+            let x = {
+                un: xun,
+                pw: xpw
+            }
+
             fetch(myurl + "/ojtapi/login", {
                 method: "POST",
                 body: JSON.stringify(x)
-            }).then(function(data){
-                if(data.Authorize == "Company"){
+            }).then((res)=>res.json()).then(function(data) {
+                if (data.Authorize == "Company") {
                     window.location.assign("company/company.html");
-                } else if (data.Authorize == "Instructor"){
+                } else if (data.Authorize == "Instructor") {
                     window.location.assign("instructor/subject.html");
-                } else if (data.Authorize == "Student"){
+                } else if (data.Authorize == "Student") {
+                    localStorage.studentId = data.fldStudentID;
                     window.location.assign("student/accounts.html");
                 } else {
-                    if(un == "Admin" && pw == "Admin"){
+                    if (un == "Admin" && pw == "Admin") {
                         window.location.assign("registrar/company.html");
                     } else {
                         window.alert("Invalid login credentials");

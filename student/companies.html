@@ -93,7 +93,7 @@
     <script type="text/javascript" src="js/jspdf.min.js"></script>
 
     <script>
-        let studentId = "201610365";
+        let studentId = localStorage.studentId;
         let myurl = "http://gordoncollegeccs-ssite.net";
 
 
@@ -104,7 +104,7 @@
         let sdata = [];
         let availReq = 3;
 
-        $.getJSON(myurl + "/ojtapi/select/tbl_pendings/", function(data) {
+        $.getJSON(myurl + "/ojtapi/tbl_pendings/", function(data) {
             for (let i = 0; i < data.length; i++) {
 
                 if (studentId == data[i].fldStudentID && data[i].fldRemarks == "Requested by Student") {
@@ -133,29 +133,44 @@
             return false;
         }
 
-
-        fetch(myurl + "/ojtapi/select/tbl_companies").then((resp) => resp.json()).then(function(data) {
-            let ls = "";
-
-            for (let i = 0; i < data.length; i++) {
-                ls += '<div class="col-sm-4 mt-4"><!-- Card Dark --><div class="card"><div class="view overlay"><img class="card-img-top" src="https://www.eyeonwindows.com/wp-content/uploads/2014/08/microsoft_headquarters_ireland.jpg" alt="Card image cap"><a><div class="mask rgba-white-slight"></div></a></div><div class="card-body  rounded-bottom"><a class="activator waves-effect mr-4"><i class="fa fa-share-alt "></i></a>';
-                ls += '<h4 class="card-title">' + data[i].fldCompanyName + '</h4>';
-                ls += '<hr class="hr-light">';
-                ls += '<p class="card-text  mb-4">At Microsoft our mission and values are to help people and businesses throughout the world realize ... </p>';
-                ls += '<p class="card-text  mb-4">Available Slots: 2</p>';
-                if (!checkVal(data[i].fldCompanyID, studentId)) {
-                    ls += '<button class="btn btn-primary" onclick="sentFunc(' + data[i].fldCompanyID + ', this.id)" id="aBtn' + data[i].fldCompanyID + '"> Apply Here</button>';
-                } else {
-                    ls += '<button class="btn btn-outline-danger" onclick="cancelFunc(' + data[i].fldCompanyID + ', this.id)" id="aBtn' + data[i].fldCompanyID + '"> Cancel Request</button>';
-                }
-                ls += '<a href="#!" class=" d-flex justify-content-end">';
-                ls += '<h5>Read more <i class="fa fa-angle-double-right"></i></h5>';
-                ls += '</a></div></div></div>';
+        
+        fetch(myurl + "/ojtapi/tbl_students/fldStudentID/"+ studentId).then((res)=>res.json()).then(function(data){
+            if(data[0].fldStatus == "Hired"){
+                $("#reqno").css("display", "none");
+                $("#companyList").html("<h1 class='grey-text text-center'>You're already hire</h1>")
+            } else {
+                selCompany();
             }
-
-            $("#companyList").html(ls);
-
         });
+        
+        
+        let selCompany = () => {
+            fetch(myurl + "/ojtapi/tbl_companies").then((resp) => resp.json()).then(function(data) {
+                let ls = "";
+
+                for (let i = 0; i < data.length; i++) {
+                    ls += '<div class="col-sm-4 mt-4"><!-- Card Dark --><div class="card"><div class="view overlay"><img class="card-img-top" src="'+data[i].fldCompanyImg+'" alt="Card image cap"><a><div class="mask rgba-white-slight"></div></a></div><div class="card-body  rounded-bottom"><a class="activator waves-effect mr-4"><i class="fa fa-share-alt "></i></a>';
+                    ls += '<h4 class="card-title">' + data[i].fldCompanyName + '</h4>';
+                    ls += '<hr class="hr-light">';
+                    ls += '<p class="card-text  mb-4">At Microsoft our mission and values are to help people and businesses throughout the world realize ... </p>';
+                    ls += '<p class="card-text  mb-4">Available Slots: 2</p>';
+                    if (!checkVal(data[i].fldCompanyID, studentId)) {
+                        ls += '<button class="btn btn-primary" onclick="sentFunc(' + data[i].fldCompanyID + ', this.id)" id="aBtn' + data[i].fldCompanyID + '"> Apply Here</button>';
+                    } else {
+                        ls += '<button class="btn btn-outline-danger" onclick="cancelFunc(' + data[i].fldCompanyID + ', this.id)" id="aBtn' + data[i].fldCompanyID + '"> Cancel Request</button>';
+                    }
+                    ls += '<a href="#!" class=" d-flex justify-content-end">';
+                    ls += '<h5>Read more <i class="fa fa-angle-double-right"></i></h5>';
+                    ls += '</a></div></div></div>';
+                }
+
+                $("#companyList").html(ls);
+
+            });            
+
+            
+        }
+
 
 
 
@@ -177,29 +192,29 @@
                     $("#" + myID).html("Cancel Request");
                     $("#" + myID).removeClass("btn-primary").addClass("btn-outline-danger");
 
-                    window.location.assign("companies.html");
                 });
 
 
             } else {
                 window.alert("Sorry but you already sen't the maximum number of request");
             }
+            window.location.assign("companies.html");
         }
 
         let cancelFunc = (val, myID) => {
 
 
 
-            fetch(myurl + "/ojtapi/delete/tbl_pendings/fldTransactionID/" + getTransactionID(val, studentId)).then(function(data) {
+            fetch(myurl + "/ojtapi/delete/tbl_pendings/fldTransactionID/" + getTransactionID(val, studentId), {
+                method:"POST"
+            }).then(function(data) {
                 $("#" + myID).html("Apply Here");
                 $("#" + myID).removeClass("btn-outline-danger").addClass("btn-primary");
 
 
-                window.location.assign("companies.html");
-
             });
 
-
+            window.location.assign("companies.html");
 
         }
 
