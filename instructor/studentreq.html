@@ -94,10 +94,10 @@
 
                         <div class="card-body">
                             <!-- Name -->
-                            <h4 class="card-title" id="stud-name">John Mart Doe</h4>
+                            <h4 class="card-title" id="stud-name"><i class="fa fa-spinner fa-pulse fa-2x"></i></h4>
                             <hr>
                             <!-- Quotation -->
-                            <p><i class="fa fa-quote-left"></i> 201510833 - BSIT Student <i class="fa fa-quote-right"></i></p>
+                            <p><i class="fa fa-quote-left"></i><span id="stud-desc"> </span> <i class="fa fa-quote-right"></i></p>
                         </div>
 
                     </div>
@@ -145,9 +145,11 @@
             for(let i = 0; i < data.length;i++){
                 pdfdata = data[i].fldResume;
                 studname = data[i].fldFname + " " + data[i].fldMname + " " + data[i].fldLname;
+                studdesc = data[i].fldStudentID + " - " + data[i].fldCourse + " Student";
             }
-            document.getElementById('resumePDF').setAttribute("src",pdfdata);
             document.getElementById('stud-name').innerHTML =studname;
+            document.getElementById('stud-desc').innerHTML =studname;
+            document.getElementById('resumePDF').setAttribute("src",pdfdata);
         });
     </script>
     <script>
