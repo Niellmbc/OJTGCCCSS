@@ -83,7 +83,7 @@
                 <div class="row">
 
                     <div class="view gradient-card-header orange flex-center" style="width: 100%;">
-                        <h4><i class="fa fa-cogs"></i> Class Code: <span id="ccode">12312</span></h4>
+                        <h4><i class="fa fa-cogs"></i> Class Code: <span id="ccode"></span></h4>
                     </div>
                     <!--Card content-->
                     <div class="col-md-12 card wow fadeIn animated card-cascade reverse" style="padding: 2%;">
@@ -100,25 +100,7 @@
                                     </thead>
                                     <tbody id="studentList">
                                         <tr>
-                                            <th scope="row">201510068</th>
-                                            <td>Jane Doe</td>
-                                            <td>BSIT</td>
-                                            <td>CCS</td>
-                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">View</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Drop</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">201512024</th>
-                                            <td>John Doe</td>
-                                            <td>BSCS</td>
-                                            <td>CCS</td>
-                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">View</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Drop</button></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">201526684</th>
-                                            <td>Lorem Ipsum</td>
-                                            <td>ACT</td>
-                                            <td>CCS</td>
-                                            <td><button type="button" class="btn btn-sm btn-outline-primary waves-effect">View</button><br><button type="button" class="btn btn-sm btn-outline-danger waves-effect">Drop</button></td>
+                                            <th colspan="4"><i class="fa fa-spinner fa-pulse fa-3x"></i></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -149,6 +131,7 @@
     <script type="text/javascript" src="js/jspdf.min.js"></script>
 
     <script>
+        document.getElementById('ccode').innerHTML = localStorage.ccode;
         let url = "http://gordoncollegeccs-ssite.net";
         fetch(url + "/ojtapi/tbl_students/fldClassCode/"+localStorage.ccode).then((resp)=>resp.json()).then(function(data){
             let ls = "";
@@ -167,6 +150,7 @@
         
         let setSt = (val) =>{
             localStorage.cstId = val;
+            window.location.assign("studentreq.html");
         }
 
     </script>

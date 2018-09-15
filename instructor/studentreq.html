@@ -109,7 +109,7 @@
                         <div class="row">
 
                             <div class="view gradient-card-header orange flex-center" style="width: 100%;">
-                                <h4><i class="fa fa-user-circle"></i> Student Status: Hired</h4>
+                                <h4><i class="fa fa-user-circle"></i> Student Status: <span id="stud-status"></span></h4>
                             </div>
                             <!--Card content-->
                             <div class="col-md-12 card wow fadeIn animated card-cascade reverse flex-center" style="padding: 7%;">
@@ -141,15 +141,21 @@
             let pdfdata = "";
             let studname = "";
             let studdesc = "";
-            console.log(data);
+            let studstatus = "";
             for(let i = 0; i < data.length;i++){
                 pdfdata = data[i].fldResume;
                 studname = data[i].fldFname + " " + data[i].fldMname + " " + data[i].fldLname;
                 studdesc = data[i].fldStudentID + " - " + data[i].fldCourse + " Student";
+                studstatus = data[i].fldStatus;
             }
             document.getElementById('stud-name').innerHTML =studname;
+            document.getElementById('stud-status').innerHTML = studstatus;
             document.getElementById('stud-desc').innerHTML =studname;
-            document.getElementById('resumePDF').setAttribute("src",pdfdata);
+            if (pdfdata === '') {
+                toastr.error('No Resume Found');
+            }else{
+                document.getElementById('resumePDF').setAttribute("src",pdfdata);
+            }
         });
     </script>
     <script>
