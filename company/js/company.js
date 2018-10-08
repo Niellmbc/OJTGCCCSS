@@ -97,6 +97,7 @@ const compSelectStudList = () =>{
 		}
 		$('#compSelect').html(longstring1);
 		$('#studApply').html(longstring2);	
+
 	});
 }
 const ApproveRequest = (studentID) =>{
@@ -141,7 +142,7 @@ const cancelInvitation = (transactionID) =>{
 		method:"POST"
 	}).then(function(data){
 		toastr.info('You have canceled the Invitation Sent');
-	window.location.assign('company.html');
+		window.location.assign('company.html');
 	});
 }
 const cancelInvites = (transactionID) =>{
@@ -154,7 +155,7 @@ const cancelInvites = (transactionID) =>{
 }
 
 const searchStud = (val) => {
-	fetch(myurl+"/ojtapi/tbl_students/fldCourse/"+val).then((res)=>res.json()).then(function(data){
+	fetch(myurl+"/ojtapi/tbl_students/fldCourse/"+val+"?select=fldFname, fldLname, fldMname, fldStatus, fldStudentID").then((res)=>res.json()).then(function(data){
 		let longstring = "";
 		for(let i =0; i < data.length;i++){
 			if(data[i].fldStatus=='Available'){
@@ -306,21 +307,22 @@ let remarks = [];
 const checkAttendance = () =>{
 	companyID =1 ;
 	check = "";
-	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname').then((res)=>res.json()).then(function(data){
-		for(let i =0;i<data.length;i++){
+	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldStudentID').then((res)=>res.json()).then(function(data){
+		for(let i =0, b = 0;i<data.length;i++){
 			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
-				check +="<input type='text' id='ids"+i+"' value='"+data[i].fldStudentID+"' hidden/>";
+				check +="<input type='text' id='ids"+b+"' value='"+data[i].fldStudentID+"' hidden/>";
 				check +="<tr>";
 				check +="<td>"+data[i].fldLname+','+data[i].fldFname+','+data[i].fldMname+"</td>";
 				check +="<td>";
-				check +='<input type="time" id="timeIn'+i+'">';
+				check +='<input type="time" id="timeIn'+b+'">';
 				check +="</td>";
 				check +="<td>";
-				check +='<input type="time"id="timeOut'+i+'">';
+				check +='<input type="time"id="timeOut'+b+'">';
 				check +="</td>";
-				check +="<td><input type='text' placeholder='Remarks' id='remarks"+i+"'></td>";
+				check +="<td><input type='text' placeholder='Remarks' id='remarks"+b+"'></td>";
 				check +="</tr>";
 				counter();
+				b++;
 			}
 		}
 		$('#checkAttendance').html(check);
@@ -335,6 +337,7 @@ const counter = () =>{
 
 const getxco = () =>{
 	return xCount;
+
 }
 
 
@@ -353,51 +356,53 @@ const sendDTR = () =>{
 	var year = today.getFullYear();
 
 
-
-	for(let i = 1; i <= getxco(); i++){
+	console.log(getxco());
+	for(let i = 0; i < getxco(); i++){
 		let idss = $(ids + i).val();
 		let sval = $(timeIn + i).val();
 		let sval1 = $(timeOut + i).val();
 		let sval2 = $(remarks1 + i).val();
 		if(sval != "" && sval1 !="" && idss !=""){
 			let jsonObj = {
-			 studentNo: idss,
-			 timein: sval, 
-			 tout: sval1, 
-			 date : mon+"/"+day+"/"+year,
-			 rmark: sval2 
+				astudentNo: idss,
+				btimein: sval, 
+				ctout: sval1, 
+				ddate : mon+"/"+day+"/"+year,
+				ermark: sval2 
 			};
 			xdata.push(jsonObj);
 		}
 	}
+	console.log(xdata)
 
 	fetch(myurl+"/ojtapi/insert/tbl_dtr",{
 		method:"POST",
 		body:JSON.stringify(xdata)
 	}).then(function(data){
+		console.log(data);
 		toastr.success('DTR submitted successfully ');
-		window.location.assign('companydtr.html');
 	});
+		// window.location.assign('companydtr.html');
 
 	
 }
 function encodeImageFileAsURL(element) {
-  var file = element.files[0];
-  var reader = new FileReader();
-  reader.onloadend = function() {
-    let CompanyId =1 
-	let img={
-		fldCompanyImg : reader.result
+	var file = element.files[0];
+	var reader = new FileReader();
+	reader.onloadend = function() {
+		let CompanyId =1 
+		let img={
+			fldCompanyImg : reader.result
+		}
+		fetch(myurl+"/ojtapi/update/tbl_companies/fldCompanyID/"+CompanyId,{
+			method:"POST",
+			body:JSON.stringify([img])	
+		}).then(function(data){
+			toastr.success('Update Image Successfully ');
+			window.location.assign('companyprofile.html');
+		});
 	}
-	fetch(myurl+"/ojtapi/update/tbl_companies/fldCompanyID/"+CompanyId,{
-		method:"POST",
-		body:JSON.stringify([img])	
-	}).then(function(data){
-		toastr.success('Update Image Successfully ');
-		window.location.assign('companyprofile.html');
-	});
-  }
-  reader.readAsDataURL(file);
+	reader.readAsDataURL(file);
 }
 
 
