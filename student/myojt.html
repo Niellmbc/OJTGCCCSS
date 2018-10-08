@@ -153,7 +153,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="dtrList">
-                                
+
                                 </tbody>
                             </table>
 
@@ -186,24 +186,29 @@
         let studentId = localStorage.studentId;
 
         let getSent = () => {
-            fetch(url + "/ojtapi/tbl_pendings/fldStudentID/" + studentId).then((resp) => resp.json()).then(function(data) {
+            fetch(url + "/ojtapi/tbl_pendings/fldCompanyID/tbl_companies/fldCompanyID?select=tbl_pendings.fldTransactionID,tbl_pendings.fldCompanyID,tbl_pendings.fldStudentID,tbl_pendings.fldRemarks,tbl_companies.fldCompanyID,tbl_companies.fldCompanyName").then((resp) => resp.json()).then(function(data) {
                 let ls_f = "";
                 let ls_s = "";
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].fldRemarks == "Requested by Student") {
-                        ls_f += '<tr>';
-                        ls_f += '<td>' + data[i].fldCompanyID + '</td>';
-                        ls_f += '<td>Pending</td>';
-                        ls_f += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Cancel</button></td>';
-                        ls_f += '</tr>';
+                    if (data[i].fldStudentID == studentId) {
 
-                    } else {
-                        ls_s += '<tr>';
-                        ls_s += '<td>' + data[i].fldCompanyID + '</td>';
-                        ls_s += '<td>Pending</td>';
-                        ls_s += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-success waves-effect"><i class="fa fa-check"></i> Accept</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Decline</button></td>';
-                        ls_s += '</tr>';
+                        if (data[i].fldRemarks == "Requested by Student") {
+                            ls_f += '<tr>';
+                            ls_f += '<td>' + data[i].fldCompanyName + '</td>';
+                            ls_f += '<td>Pending</td>';
+                            ls_f += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Cancel</button></td>';
+                            ls_f += '</tr>';
+
+                        } else {
+                            ls_s += '<tr>';
+                            ls_s += '<td>' + data[i].fldCompanyName + '</td>';
+                            ls_s += '<td>Pending</td>';
+                            ls_s += '<td><button type="button" class="btn btn-sm btn-outline-primary waves-effect"><i class="fa fa-eye"></i> View</button><button type="button" class="btn btn-sm btn-outline-success waves-effect"><i class="fa fa-check"></i> Accept</button><button type="button" class="btn btn-sm btn-outline-danger waves-effect"><i class="fa fa-close"></i> Decline</button></td>';
+                            ls_s += '</tr>';
+                        }
+
                     }
+
                 }
                 $("#sentList").html(ls_f);
                 $("#reqList").html(ls_s);
@@ -283,20 +288,20 @@
                 $("#hiredStudent").css("display", "none");
             }
         });
-        
+
         const selDtr = () => {
-            fetch(url + "/ojtapi/tbl_dtr/fldStudentID/"+studentId).then((res)=>res.json()).then(function(data){
+            fetch(url + "/ojtapi/tbl_dtr/fldStudentID/" + studentId).then((res) => res.json()).then(function(data) {
                 let ls = '';
-                
-                for(let i = 0; i < data.length;i++){
+
+                for (let i = 0; i < data.length; i++) {
                     ls += '<tr>';
-                    ls += '<td>'+data[i].fldDate+'</td>';
-                    ls += '<td>'+data[i].fldTimeIn+'</td>';
-                    ls += '<td>'+data[i].fldTimeOut+'</td>';
-                    ls += '<td>'+data[i].fldRemarks+'</td>';
+                    ls += '<td>' + data[i].fldDate + '</td>';
+                    ls += '<td>' + data[i].fldTimeIn + '</td>';
+                    ls += '<td>' + data[i].fldTimeOut + '</td>';
+                    ls += '<td>' + data[i].fldRemarks + '</td>';
                     ls += '</tr>';
                 }
-                
+
                 $("#dtrList").html(ls)
             });
         }
