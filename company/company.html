@@ -144,15 +144,15 @@
             longstring +="<h4 class='card-title'>"+data[i].fldFname+' '+data[i].fldMname+' '+data[i].fldLname+"</h4>";
             longstring +="<hr>";
             longstring +=" <p><i class='fa fa-quote-left'></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>";
-            longstring +="<button class='btn btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
+            longstring +="<button class='btn-block btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
             if(compareData(companyID,data[i].fldStudentID)){
               if(status(companyID,data[i].fldStudentID)=='Requested by Student'){
-                longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Confirmation</button>";
+                longstring +="<button class='btn-block btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Confirmation</button>";
               }else{
-                longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
+                longstring +="<button class='btn-block btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
               }
             }else{
-              longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
+              longstring +="<button class='btn-block btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
             }
             longstring +="</div>";
             longstring +="</div>";

@@ -75,6 +75,7 @@ const compSelectStudList = () =>{
 		console.log(data);
 		let longstring1 = "";
 		let longstring2 = "";
+		let longstring3="";
 		for(let i=0;i<data.length;i++){
 			if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Selected by Company'){
 				longstring1 +="<tr>";
@@ -85,7 +86,7 @@ const compSelectStudList = () =>{
 				longstring1 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring1 +="</tr>";
 			}
-			if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Requested by Student'){
+			else if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Requested by Student'){
 				longstring2 +="<tr>";
 				longstring2 +="<th scope='row'>"+data[i].fldStudentID+"</th>";
 				longstring2 +="<td>"+data[i].fldLname+', '+data[i].fldFname+', '+data[i].fldMname+"</td>";
@@ -93,10 +94,19 @@ const compSelectStudList = () =>{
 				longstring2 +="<td>"+data[i].fldRemarks+"</td>";
 				longstring2 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='ApproveRequest("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring2 +="</tr>";
+			} else if(compId == data[i].fldCompanyID && data[i].fldRemarks=='For Interview'){
+				longstring3 +="<tr>";
+				longstring3 +="<th scope='row'>"+data[i].fldStudentID+"</th>";
+				longstring3 +="<td>"+data[i].fldLname+', '+data[i].fldFname+', '+data[i].fldMname+"</td>";
+				longstring3 +="<td>"+data[i].fldCourse+"</td>";
+				longstring3 +="<td>"+data[i].fldRemarks+"</td>";
+				longstring3 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='InterviewApp("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
+				longstring3 +="</tr>";
 			} 
 		}
 		$('#compSelect').html(longstring1);
 		$('#studApply').html(longstring2);	
+		$('#interview').html(longstring3);
 
 	});
 }
@@ -104,7 +114,32 @@ const ApproveRequest = (studentID) =>{
 	let hireDet = {
 		CompanyId: "1",
 		StudentId: studentID,
-		Remarks: "Approve Request"
+		Remarks: "For Interview"
+	}
+	let approve = {
+		fldStatus : "Interview"
+	}
+	fetch(myurl+"/ojtapi/delete/tbl_pendings/fldStudentID/"+studentID,{
+		method:"POST"
+	}).then(function(data){
+		fetch(myurl+ "/ojtapi/insert/tbl_pendings",{
+			method:"POST",
+			body:JSON.stringify([hireDet])
+		}).then(function(data){
+			toastr.success('You have successfully sent an Invitation');
+		});
+	});
+	
+	fetch(myurl+"/ojtapi/update/tbl_students/fldStudentID/"+studentID,{
+		method:"POST",
+		body:JSON.stringify([approve])
+	});
+}
+const InterviewApp = (studentID) =>{
+	let hireDet = {
+		CompanyId: "1",
+		StudentId: studentID,
+		Remarks: "Approved by Company"
 	}
 	let approve = {
 		fldStatus : "Hired"
@@ -116,7 +151,7 @@ const ApproveRequest = (studentID) =>{
 			method:"POST",
 			body:JSON.stringify([hireDet])
 		}).then(function(data){
-			toastr.success('You successfully hired a student');
+			toastr.success('You have successfully sent an Invitation');
 		});
 	});
 	
@@ -125,6 +160,7 @@ const ApproveRequest = (studentID) =>{
 		body:JSON.stringify([approve])
 	});
 }
+
 
 const HiredApplicantByView = () =>{
 	let longstring = "";
@@ -245,7 +281,7 @@ const attendanceStud = () =>{
 		studentRec = "";
 		
 		for(let i = 0;i<data.length;i++){
-			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
+			if(data[i].fldRemarks =='Approved by Company' && data[i].fldCompanyID == companyID ){
 
 				studentTab +="<li class='nav-item'>";
 				if(i==0){
@@ -309,7 +345,7 @@ const checkAttendance = () =>{
 	check = "";
 	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldStudentID').then((res)=>res.json()).then(function(data){
 		for(let i =0, b = 0;i<data.length;i++){
-			if(data[i].fldRemarks =='Approve Request' && data[i].fldCompanyID == companyID ){
+			if(data[i].fldRemarks =='Approved by Company' && data[i].fldCompanyID == companyID ){
 				check +="<input type='text' id='ids"+b+"' value='"+data[i].fldStudentID+"' hidden/>";
 				check +="<tr>";
 				check +="<td>"+data[i].fldLname+','+data[i].fldFname+','+data[i].fldMname+"</td>";
