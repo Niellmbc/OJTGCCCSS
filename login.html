@@ -93,6 +93,7 @@
             }).then((res)=>res.json()).then(function(data) {
                 if (data.Authorize == "Company") {
                     window.location.assign("company/company.html");
+                    localStorage.companyID =data.fldCompanyID; 
                 } else if (data.Authorize == "Instructor") {
                     window.location.assign("instructor/subject.html");
                 } else if (data.Authorize == "Student") {

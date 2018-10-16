@@ -1,5 +1,5 @@
 let myurl ="http://gordoncollegeccs-ssite.net";
-
+let compID = localStorage.companyID;
 $.ajaxSetup({
 	async: false
 });
@@ -13,9 +13,9 @@ function data(){
 }
 data();
 
-function compareData(compID,stdID){
+function compareData(companyID,stdID){
 	for (let i = 0; i < arr.length; i++) {
-		if(arr[i].fldCompanyID == compID && arr[i].fldStudentID == stdID){
+		if(arr[i].fldCompanyID == companyID && arr[i].fldStudentID == stdID){
 			return arr[i].fldTransactionID;
 		}
 
@@ -39,8 +39,8 @@ const viewApplicant = () =>{
 	});
 }
 const viewCompanyPro = () =>{
-	let id =1;
-	fetch(myurl+"/ojtapi/tbl_companies/fldCompanyID/"+id).then((res)=>res.json()).then(function(data){
+	
+	fetch(myurl+"/ojtapi/tbl_companies/fldCompanyID/"+localStorage.companyID).then((res)=>res.json()).then(function(data){
 		// localStorage.compId=data[0].fldCompanyID;
 		document.getElementById('companyName').innerHTML = data[0].fldCompanyName;
 		document.getElementById('compEmail').value = data[0].fldEmailAddress;
@@ -53,9 +53,9 @@ const viewCompanyPro = () =>{
 const CompanyHire = (studsid) =>{
 	localStorage.studsid = studsid;
 	let studid = localStorage.studsid;
-	let compId = localStorage.compId;
+	
 	let hireDet = {
-		CompanyId: "1",
+		CompanyId: localStorage.companyID,
 		StudentId: studid,
 		Remarks: "Selected by Company"
 	}
@@ -70,37 +70,36 @@ const CompanyHire = (studsid) =>{
 
 const compSelectStudList = () =>{
 	let studid = localStorage.studsid;
-	let compId = 1;
 	fetch(myurl+"/ojtapi/tbl_pendings/fldStudentID/tbl_students/fldStudentID?select=tbl_pendings.fldCompanyID, tbl_pendings.fldRemarks, tbl_students.fldStudentID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldCourse").then((res)=>res.json()).then(function(data){
 		console.log(data);
 		let longstring1 = "";
 		let longstring2 = "";
 		let longstring3="";
 		for(let i=0;i<data.length;i++){
-			if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Selected by Company'){
+			if(localStorage.companyID == data[i].fldCompanyID && data[i].fldRemarks=='Selected by Company'){
 				longstring1 +="<tr>";
 				longstring1 +="<th scope='row'>"+data[i].fldStudentID+"</th>";
 				longstring1 +="<td>"+data[i].fldLname+', '+data[i].fldFname+', '+data[i].fldMname+"</td>";
 				longstring1 +="<td>"+data[i].fldCourse+"</td>";
 				longstring1 +="<td>"+data[i].fldRemarks+"</td>";
-				longstring1 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
+				longstring1 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(localStorage.companyID,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring1 +="</tr>";
 			}
-			else if(compId == data[i].fldCompanyID && data[i].fldRemarks=='Requested by Student'){
+			else if(localStorage.companyID == data[i].fldCompanyID && data[i].fldRemarks=='Requested by Student'){
 				longstring2 +="<tr>";
 				longstring2 +="<th scope='row'>"+data[i].fldStudentID+"</th>";
 				longstring2 +="<td>"+data[i].fldLname+', '+data[i].fldFname+', '+data[i].fldMname+"</td>";
 				longstring2 +="<td>"+data[i].fldCourse+"</td>";
 				longstring2 +="<td>"+data[i].fldRemarks+"</td>";
-				longstring2 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='ApproveRequest("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
+				longstring2 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='ApproveRequest("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(localStorage.companyID,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring2 +="</tr>";
-			} else if(compId == data[i].fldCompanyID && data[i].fldRemarks=='For Interview'){
+			} else if(localStorage.companyID == data[i].fldCompanyID && data[i].fldRemarks=='For Interview'){
 				longstring3 +="<tr>";
 				longstring3 +="<th scope='row'>"+data[i].fldStudentID+"</th>";
 				longstring3 +="<td>"+data[i].fldLname+', '+data[i].fldFname+', '+data[i].fldMname+"</td>";
 				longstring3 +="<td>"+data[i].fldCourse+"</td>";
 				longstring3 +="<td>"+data[i].fldRemarks+"</td>";
-				longstring3 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='InterviewApp("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
+				longstring3 +="<td><a class='btn-floating btn-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye'></i></a><a class='btn-floating btn-success' onclick='InterviewApp("+data[i].fldStudentID+")'><i class='fa fa-check'></i></a> <a class='btn-floating btn-danger' onclick='cancelInvites("+compareData(localStorage.companyID,data[i].fldStudentID)+")'><i class='fa fa-times'></i></a></td>";
 				longstring3 +="</tr>";
 			} 
 		}
@@ -112,7 +111,7 @@ const compSelectStudList = () =>{
 }
 const ApproveRequest = (studentID) =>{
 	let hireDet = {
-		CompanyId: "1",
+		CompanyId: localStorage.companyID,
 		StudentId: studentID,
 		Remarks: "For Interview"
 	}
@@ -137,7 +136,7 @@ const ApproveRequest = (studentID) =>{
 }
 const InterviewApp = (studentID) =>{
 	let hireDet = {
-		CompanyId: "1",
+		CompanyId: localStorage.companyID,
 		StudentId: studentID,
 		Remarks: "Approved by Company"
 	}
@@ -166,8 +165,8 @@ const HiredApplicantByView = () =>{
 	let longstring = "";
 	let studid = localStorage.id;
 	let invitationStatus = localStorage.InvitationStatus;
-	if(compareData(1,studid)){
-		longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(1,studid)+")'><i class='fa fa-times mr-1'></i>Cancel Invitation</button>";
+	if(compareData(localStorage.companyID,studid)){
+		longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(localStorage.companyID,studid)+")'><i class='fa fa-times mr-1'></i>Cancel Invitation</button>";
 	}else{
 		longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+studid+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
 	}
@@ -206,8 +205,8 @@ const searchStud = (val) => {
 				longstring +="<hr>";
 				longstring +=" <p><i class='fa fa-quote-left'></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>";
 				longstring +="<button class='btn btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
-				if(compareData(1,data[i].fldStudentID)){
-					longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
+				if(compareData(localStorage.companyID,data[i].fldStudentID)){
+					longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(localStorage.companyID,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
 				}else{
 					longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
 				}
@@ -235,8 +234,8 @@ const findStud = () => {
 			longstring +="<hr>";
 			longstring +=" <p><i class='fa fa-quote-left'></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>";
 			longstring +="<button class='btn btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
-			if(compareData(1,data[i].fldStudentID)){
-				longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
+			if(compareData(localStorage.companyID,data[i].fldStudentID)){
+				longstring +="<button class='btn btn-outline-danger' onclick='cancelInvitation("+compareData(localStorage.companyID,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
 			}else{
 				longstring +="<button class='btn btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
 			}
@@ -261,7 +260,7 @@ const updateAccount = () =>{
 		if(data[0].fldPassword == currPass){
 			if(newPass == confirmPass){
 
-				fetch(myurl+'/ojtapi/update/tbl_companies/fldCompanyID/'+1,{
+				fetch(myurl+'/ojtapi/update/tbl_companies/fldCompanyID/'+localStorage.companyID,{
 					method:"POST",
 					body:JSON.stringify([updateDet])
 				}).then(function(data){
@@ -273,7 +272,7 @@ const updateAccount = () =>{
 }
 
 const attendanceStud = () =>{
-	let companyID = 1;
+	
 
 	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldStudentID, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldLname').then((res)=>res.json()).then(function(data){
 
@@ -281,7 +280,7 @@ const attendanceStud = () =>{
 		studentRec = "";
 		
 		for(let i = 0;i<data.length;i++){
-			if(data[i].fldRemarks =='Approved by Company' && data[i].fldCompanyID == companyID ){
+			if(data[i].fldRemarks =='Approved by Company' && data[i].fldCompanyID == localStorage.companyID ){
 
 				studentTab +="<li class='nav-item'>";
 				if(i==0){
@@ -341,11 +340,11 @@ let timein = [];
 let timeout = [];
 let remarks = [];
 const checkAttendance = () =>{
-	companyID =1 ;
+	
 	check = "";
 	fetch(myurl+'/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldRemarks, tbl_pendings.fldCompanyID, tbl_students.fldLname, tbl_students.fldFname, tbl_students.fldMname, tbl_students.fldStudentID').then((res)=>res.json()).then(function(data){
 		for(let i =0, b = 0;i<data.length;i++){
-			if(data[i].fldRemarks =='Approved by Company' && data[i].fldCompanyID == companyID ){
+			if(data[i].fldRemarks =='Approved by Company' && data[i].fldCompanyID == localStorage.companyID ){
 				check +="<input type='text' id='ids"+b+"' value='"+data[i].fldStudentID+"' hidden/>";
 				check +="<tr>";
 				check +="<td>"+data[i].fldLname+','+data[i].fldFname+','+data[i].fldMname+"</td>";
@@ -426,11 +425,11 @@ function encodeImageFileAsURL(element) {
 	var file = element.files[0];
 	var reader = new FileReader();
 	reader.onloadend = function() {
-		let CompanyId =1 
+	
 		let img={
 			fldCompanyImg : reader.result
 		}
-		fetch(myurl+"/ojtapi/update/tbl_companies/fldCompanyID/"+CompanyId,{
+		fetch(myurl+"/ojtapi/update/tbl_companies/fldCompanyID/"+localStorage.companyID,{
 			method:"POST",
 			body:JSON.stringify([img])	
 		}).then(function(data){
@@ -440,6 +439,10 @@ function encodeImageFileAsURL(element) {
 	}
 	reader.readAsDataURL(file);
 }
+ const logout= ()=>{
+ 	window.location.assign('../../../login.html');
+
+ }
 
 
 

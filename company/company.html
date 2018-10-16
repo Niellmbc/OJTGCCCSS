@@ -41,7 +41,7 @@
             <li ><a class="collapsible-header waves-effect arrow-r" href="companyprofile.html"><i class="fa fa-building"></i>Company Profile</a></li>
             <li><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-list-alt"></i>Applicant List</a></li>
             <li><a class="collapsible-header waves-effect arrow-r" href="companydtr.html"><i class="fa fa-calendar"></i>Student DTR</a></li>
-            <li><a class="collapsible-header waves-effect arrow-r" href="applicantlist.html"><i class="fa fa-sign-out"></i>Log-out</a></li>
+            <li><a class="collapsible-header waves-effect arrow-r" onclick="logout()" href="applicantlist.html"><i class="fa fa-sign-out"></i>Log-out</a></li>
 
             <!--/. Side navigation links -->
           </ul>
@@ -115,16 +115,17 @@
         $('.mdb-select').material_select();
         new WOW().init();
         let join=[];
-        let companyID =1;
+        let compsID =localStorage.companyID;
+        console.log(compID);
         function getIT(){
           $.getJSON(myurl +"/ojtapi/tbl_students/fldStudentID/tbl_pendings/fldStudentID?select=tbl_pendings.fldCompanyID, tbl_students.fldStudentID, tbl_students.fldStatus",function(data){
             join = data;
           });
         }
         getIT();
-        function status(compID,studentID){
+        function status(companyID,studentID){
           for(let i=0;i<join.length;i++){
-            if(join[i].fldCompanyID == compID && join[i].fldStudentID == studentID){
+            if(join[i].fldCompanyID == companyID && join[i].fldStudentID == studentID){
               return join[i].fldStatus;
             }
           }
@@ -145,11 +146,11 @@
             longstring +="<hr>";
             longstring +=" <p><i class='fa fa-quote-left'></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci</p>";
             longstring +="<button class='btn-block btn-outline-primary' onclick='viewStud("+data[i].fldStudentID+")'><i class='fa fa-eye mr-2'>View</i></button>";
-            if(compareData(companyID,data[i].fldStudentID)){
-              if(status(companyID,data[i].fldStudentID)=='Requested by Student'){
+            if(compareData(compsID,data[i].fldStudentID)){
+              if(status(compsID,data[i].fldStudentID)=='Requested by Student'){
                 longstring +="<button class='btn-block btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Confirmation</button>";
               }else{
-                longstring +="<button class='btn-block btn-outline-danger' onclick='cancelInvitation("+compareData(1,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
+                longstring +="<button class='btn-block btn-outline-danger' onclick='cancelInvitation("+compareData(compsID,data[i].fldStudentID)+")'><i class='fa fa-times mr-1'></i>Cancel</button>";
               }
             }else{
               longstring +="<button class='btn-block btn-outline-success' onclick='CompanyHire("+data[i].fldStudentID+")'><i class='fa fa-check mr-1'></i>Send Invitation</button>";
